@@ -1,0 +1,11 @@
+node_modules/
+VÍDEOS/
+FOTOS/
+logos/node_modules/
+logos/GreatVibes.woff2
+logos/Raleway600.woff2
+logos/package.json
+logos/package-lock.json
+logos/gerar-logo.mjs
+dist/.vercel/
+.netlify/

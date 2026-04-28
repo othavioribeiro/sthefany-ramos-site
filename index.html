@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sthefany Ramos — Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais em Florianópolis, Palhoça, São José, Balneário Camboriú e todo o Brasil (SC, RS, PR, SP). 5+ anos de carreira.">
+  <meta name="keywords" content="cantora casamento Florianópolis, cantora gospel Santa Catarina, cantora cerimônia SC, cantora casamento Palhoça, cantora São José SC, cantora Balneário Camboriú, cantora Curitiba, cantora São Paulo, ministração louvor Santa Catarina, música ao vivo casamento SC">
+  <meta name="theme-color" content="#C9956C">
+
+  <meta property="og:title" content="Sthefany Ramos | Uma Voz Dessa Geração">
+  <meta property="og:description" content="Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sthefanyramos.com.br">
+  <meta property="og:image" content="https://sthefanyramos.com.br/images/og-cover.jpg">
+  <link rel="canonical" href="https://sthefanyramos.com.br">
+
+  <title>Sthefany Ramos | Uma Voz Dessa Geração</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Sthefany Ramos",
+    "url": "https://sthefanyramos.com.br",
+    "description": "Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais",
+    "areaServed": "Brasil",
+    "genre": ["Gospel", "Clássico", "MPB", "Pop Cristão"],
+    "sameAs": [
+      "https://instagram.com/sthefanyramosoficial",
+      "https://youtube.com/@sthefanyramosoficial"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Barra de progresso de leitura -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Cursor personalizado (desktop) -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-name">Sthefany Ramos</span>
+        <span class="logo-subtitle">Uma Voz Dessa Geração</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#inicio" class="nav-link">Início</a></li>
+        <li><a href="#sobre" class="nav-link">Quem sou eu?</a></li>
+        <li class="nav-dropdown">
+          <a href="#servicos" class="nav-link">Serviços <i class="fas fa-chevron-down fa-xs"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#casamentos">Cerimônias de Casamento</a></li>
+            <li><a href="#ministerio">Ministrações &amp; Igrejas</a></li>
+            <li><a href="#eventos">Eventos Sociais</a></li>
+          </ul>
+        </li>
+        <li><a href="#multimidia" class="nav-link">Multimídia</a></li>
+        <li><a href="#contato" class="nav-link nav-cta">Solicitar Orçamento</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="inicio">
+    <div class="hero-slideshow" aria-hidden="true">
+      <div class="hs-slide hs-1"></div>
+      <div class="hs-slide hs-2"></div>
+      <div class="hs-slide hs-3"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-pre"><span>Cantora &amp; Ministra</span></p>
+      <h1 class="hero-name">Sthefany<span class="hero-sobrenome">Ramos</span></h1>
+      <p class="hero-tagline">Transformando momentos em memórias através da voz</p>
+      <div class="hero-btns">
+        <a href="#casamentos" class="btn btn-primary">Cerimônias</a>
+        <a href="#ministerio" class="btn btn-outline">Ministério</a>
+        <a href="#multimidia" class="btn btn-outline">Assista</a>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Descubra</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VALUE BAR ========== -->
+  <div class="value-bar">
+    <div class="marquee-track" aria-hidden="true">
+      <div class="marquee-inner">
+        <span class="mq-item"><i class="fas fa-music"></i>Repertório Personalizado</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-comments"></i>Depoimentos de Noivas Reais</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-church"></i>Ministrações Cheias do Espírito Santo</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-star"></i>Formação Técnica Vocal</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-map-marker-alt"></i>Atende Todo o Brasil</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-music"></i>Repertório Personalizado</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-comments"></i>Depoimentos de Noivas Reais</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-church"></i>Ministrações Cheias do Espírito Santo</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-star"></i>Formação Técnica Vocal</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas fa-map-marker-alt"></i>Atende Todo o Brasil</span>
+        <span class="mq-dot">◆</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-img reveal-left">
+          <div class="img-frame">
+            <!--
+              FOTO — substitua "images/foto-sobre.jpg" pela sua foto.
+              Proporção recomendada: 3:4 (retrato).
+            -->
+            <img src="images/foto-sobre.jpg" alt="Sthefany Ramos — Cantora"
+              onerror="this.parentElement.classList.add('img-placeholder')">
+            <div class="img-placeholder-label">Adicione sua foto aqui<br><small>images/foto-sobre.jpg</small></div>
+          </div>
+          <div class="img-accent"></div>
+        </div>
+
+        <div class="about-content reveal-right">
+          <p class="tag">Quem sou eu?</p>
+          <h2 class="section-title">Uma voz que <em>toca a alma</em></h2>
+          <p class="body-text">A música sempre foi mais do que uma profissão para mim; ela é o canal pelo qual expresso minha fé e a sensibilidade que dedico a cada história que ajudo a contar. Como cantora de cerimônias e ministra, entendo que minha missão é transformar momentos solenes em memórias eternas através de uma entrega técnica impecável e, acima de tudo, com alma.</p>
+          <p class="body-text">Por trás da voz que ecoa nos altares, existe uma mulher que encontra sua maior força e inspiração no lar. Sou casada com Othávio, meu parceiro de vida e maior incentivador, e sou mãe do João Lucas. Eles são o meu porto seguro e a razão pela qual busco a excelência em tudo o que faço. É desse amor familiar que extraio a sensibilidade necessária para cantar em casamentos, compreendendo profundamente o valor da união que está sendo celebrada.</p>
+          <p class="body-text">No ministério, minha entrega é guiada pela reverência. Servir a Deus através do louvor é o que me sustenta. Nas ministrações e igrejas, o foco deixa de ser a técnica e passa a ser a adoração genuína, criando um ambiente onde a congregação pode se conectar com o Eterno Deus de forma profunda e verdadeira.</p>
+
+          <!-- ASSINATURA: substitua pela imagem PNG da sua assinatura -->
+          <div class="about-sig">
+            <img src="images/assinatura.png" alt="Assinatura" class="sig-img"
+              onerror="this.style.display='none'; document.getElementById('sig-text').style.display='block'">
+            <span id="sig-text" class="sig-text" style="display:none">Sthefany Ramos</span>
+          </div>
+
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num">5+</span><span class="stat-lbl">Anos de ministério</span></div>
+            <div class="stat"><span class="stat-num">1M+</span><span class="stat-lbl">Views no YouTube</span></div>
+            <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Sempre ao vivo</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="servicos" class="services-anchor"></section>
+
+  <!-- CASAMENTOS -->
+  <div class="service-block svc-wedding" id="casamentos">
+    <div class="container">
+      <div class="svc-grid reveal">
+        <div class="svc-content">
+          <p class="tag">Para Noivas</p>
+          <h2 class="svc-title">Cerimônias de Casamento</h2>
+          <p class="body-text">O dia mais especial merece uma trilha sonora que eternize cada emoção. Com um repertório que vai do clássico ao contemporâneo — hinos cristãos, canções especiais e momentos únicos — sua cerimônia se tornará inesquecível.</p>
+          <ul class="svc-features">
+            <li><i class="fas fa-check"></i>Repertório personalizado para cada momento</li>
+            <li><i class="fas fa-check"></i>Duo (voz &amp; violão) ou com banda</li>
+            <li><i class="fas fa-check"></i>Entrada dos padrinhos, noiva, momento especial e saída</li>
+            <li><i class="fas fa-check"></i>Reunião prévia para escolha das músicas</li>
+            <li><i class="fas fa-check"></i>Rede de músicos parceiros</li>
+          </ul>
+          <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
+        </div>
+        <div class="svc-media">
+          <div class="svc-loop-wrap">
+            <video autoplay loop muted playsinline class="svc-loop">
+              <source src="images/loop-casamentos.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINISTÉRIO -->
+  <div class="service-block svc-church" id="ministerio">
+    <div class="container">
+      <div class="svc-grid svc-grid-rev reveal">
+        <div class="svc-content">
+          <p class="tag church-tag">Para Igrejas &amp; Ministérios</p>
+          <h2 class="svc-title">Ministrações &amp; Adoração</h2>
+          <p class="body-text">Com sensibilidade ao Espírito Santo e um coração de adoradora, ministro a congregação através da música, criando um ambiente de encontro genuíno com Deus. Disponível para cultos especiais, retiros, conferências e eventos ministeriais.</p>
+          <ul class="svc-features church-feat">
+            <li><i class="fas fa-check"></i>Ministração conduzida pelo Espírito Santo</li>
+            <li><i class="fas fa-check"></i>Repertório de adoração contemporâneo e clássico</li>
+            <li><i class="fas fa-check"></i>Cultos especiais, retiros e conferências</li>
+            <li><i class="fas fa-check"></i>Música autoral que edifica a fé</li>
+            <li><i class="fas fa-check"></i>Prontidão para servir à congregação</li>
+          </ul>
+          <a href="#contato" class="btn btn-church">Entrar em Contato</a>
+        </div>
+        <div class="svc-media">
+          <div class="video-wrap">
+            <!--
+              VÍDEO MINISTÉRIO — coloque aqui o vídeo da sua música autoral do YouTube.
+            -->
+            <iframe
+              src="https://www.youtube.com/embed/KABJcP7TnC0"
+              title="Sthefany Ramos — Ministração e Adoração"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+            <div class="video-ph">
+              <i class="fab fa-youtube"></i>
+              <p>Coloque aqui seu vídeo autoral do YouTube</p>
+            </div>
+          </div>
+          <p class="video-caption"><em>"A música que o Senhor colocou no meu coração"</em></p>
+          <div class="church-photo-wrap">
+            <img src="images/ministerio.jpg" alt="Sthefany Ramos — Adoração e ministração" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTOS SOCIAIS -->
+  <div class="service-block svc-events" id="eventos">
+    <div class="container">
+      <div class="svc-grid reveal">
+        <div class="svc-content">
+          <p class="tag">Eventos Corporativos &amp; Sociais</p>
+          <h2 class="svc-title">Elegância em cada ocasião</h2>
+          <p class="body-text">Elegância e versatilidade para jantares, recepções, comemorações e eventos corporativos. Com um repertório diversificado dentro do universo cristão e clássico, garantindo a atmosfera perfeita para cada ocasião.</p>
+          <ul class="svc-features">
+            <li><i class="fas fa-check"></i>Jantares e recepções de alto padrão</li>
+            <li><i class="fas fa-check"></i>Formaturas e celebrações especiais</li>
+            <li><i class="fas fa-check"></i>Eventos corporativos e institucionais</li>
+            <li><i class="fas fa-check"></i>Repertório clássico, MPB e pop cristão</li>
+            <li><i class="fas fa-check"></i>Atende em todo o Brasil</li>
+          </ul>
+          <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
+        </div>
+        <div class="svc-media">
+          <!--
+            FOTOS EVENTOS — substitua pelos caminhos das suas fotos.
+          -->
+          <div class="svc-img-grid">
+            <img src="images/evento1.jpg" alt="Sthefany Ramos — Evento Social">
+            <video autoplay loop muted playsinline class="svc-loop-img portrait">
+              <source src="images/loop-eventos.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== MULTIMÍDIA ========== -->
+  <section class="portfolio" id="multimidia">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">Multimídia</p>
+        <h2 class="section-title">Veja e ouça <em>ao vivo</em></h2>
+      </div>
+
+      <!-- DESTAQUE: grade de vídeos YouTube para reprodução -->
+      <div class="media-yt-grid reveal">
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/_KVrOmwN_Tg?rel=0"
+            title="Sthefany Ramos — Ao Vivo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/KABJcP7TnC0?rel=0"
+            title="Sthefany Ramos — Ministração e Adoração"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- GALERIA: fotos + loops nativos -->
+      <div class="media-masonry reveal">
+        <div class="media-item tall">
+          <img src="images/foto-sobre.jpg" alt="Sthefany Ramos — Cantora">
+        </div>
+        <div class="media-item">
+          <img src="images/evento1.jpg" alt="Sthefany Ramos — Evento">
+        </div>
+        <div class="media-item">
+          <img src="images/casamento1.jpg" alt="Sthefany Ramos — Casamento">
+        </div>
+        <div class="media-item tall">
+          <video autoplay loop muted playsinline>
+            <source src="images/loop-casamentos.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="media-item">
+          <img src="images/ministerio.jpg" alt="Sthefany Ramos — Ministração">
+        </div>
+        <div class="media-item">
+          <video autoplay loop muted playsinline>
+            <source src="images/loop-ministerio.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="media-item">
+          <img src="images/evento2.jpg" alt="Sthefany Ramos — Evento Social">
+        </div>
+      </div>
+
+      <div class="media-yt-cta reveal">
+        <p class="media-yt-text">Assista a todos os vídeos no canal oficial</p>
+        <a href="https://youtube.com/@sthefanyramosoficial" target="_blank" rel="noopener" class="btn btn-primary">
+          <i class="fab fa-youtube"></i> @sthefanyramosoficial
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== DEPOIMENTOS ========== -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">Depoimentos</p>
+        <h2 class="section-title">O que dizem sobre <em>minha voz</em></h2>
+      </div>
+
+      <div class="slider-wrap reveal">
+        <div class="slider-track" id="slider-track">
+
+          <!-- NOIVA 1 — substitua pelo depoimento real -->
+          <div class="tcard">
+            <div class="tcard-badge badge-noiva"><i class="fas fa-heart"></i> Noiva</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"[Depoimento da noiva será adicionado em breve — aguardando confirmação]"</p>
+            <div class="tauthor">
+              <span class="tname">— Nome da Noiva</span>
+              <span class="ttitle">Cerimônia — Local, Cidade SC</span>
+            </div>
+          </div>
+
+          <!-- NOIVA 2 — substitua pelo depoimento real -->
+          <div class="tcard">
+            <div class="tcard-badge badge-noiva"><i class="fas fa-heart"></i> Noiva</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"[Depoimento da noiva será adicionado em breve — aguardando confirmação]"</p>
+            <div class="tauthor">
+              <span class="tname">— Nome da Noiva</span>
+              <span class="ttitle">Cerimônia — Local, Cidade SC</span>
+            </div>
+          </div>
+
+          <!-- PASTOR 1 — substitua pelo depoimento real -->
+          <div class="tcard">
+            <div class="tcard-badge badge-pastor"><i class="fas fa-church"></i> Pastor</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"[Testemunho do pastor será adicionado em breve — aguardando confirmação]"</p>
+            <div class="tauthor">
+              <span class="tname">— Nome do Pastor</span>
+              <span class="ttitle">Igreja — Cidade SC</span>
+            </div>
+          </div>
+
+          <!-- PASTOR 2 — substitua pelo depoimento real -->
+          <div class="tcard">
+            <div class="tcard-badge badge-pastor"><i class="fas fa-church"></i> Pastor</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"[Testemunho do pastor será adicionado em breve — aguardando confirmação]"</p>
+            <div class="tauthor">
+              <span class="tname">— Nome do Pastor</span>
+              <span class="ttitle">Igreja — Cidade SC</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider-controls">
+          <button class="sl-btn" id="prev-btn" aria-label="Depoimento anterior"><i class="fas fa-chevron-left"></i></button>
+          <div class="sl-dots" id="sl-dots"></div>
+          <button class="sl-btn" id="next-btn" aria-label="Próximo depoimento"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">Dúvidas Frequentes</p>
+        <h2 class="section-title">Tudo que você precisa <em>saber</em></h2>
+      </div>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Você atende em qual região do Brasil?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>Tenho base em Santa Catarina (Palhoça, São José, Florianópolis e Balneário Camboriú) e atendo em todo o Brasil — Rio Grande do Sul, Paraná, Curitiba, São Paulo e demais estados. Para eventos fora de SC, os custos de deslocamento e hospedagem são acordados separadamente.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Você leva equipamento de som?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>Para pequenas cerimônias, possuo equipamento próprio (microfone, caixa e monitor). Para eventos maiores, recomendo a contratação de um técnico de som profissional — tenho parceiros de confiança para indicar.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Como funciona a escolha do repertório?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>Após a confirmação, realizamos uma reunião (presencial ou videochamada) para entender o estilo do casal e o tipo de cerimônia. Apresento sugestões para cada momento e o repertório final é aprovado com até 30 dias de antecedência.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Qual o prazo ideal para contratar?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>O prazo ideal é de no mínimo 12 meses de antecedência, garantindo disponibilidade em agenda. Em casos onde a agenda ainda estiver em aberto na data desejada, é possível realizar a contratação com até 30 dias de antecedência — entre em contato para verificar.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Você canta com banda ao vivo ou apenas playback?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>Trabalho preferencialmente com músicos ao vivo. O playback é uma opção para cerimônias com restrição orçamentária. Tenho parceiros músicos de excelência na minha equipe.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Posso solicitar músicas que não estão no repertório?</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>Sim! Com antecedência suficiente, posso aprender músicas especialmente para o seu evento. Cada solicitação é avaliada individualmente.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTATO ========== -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-info reveal-left">
+          <p class="tag">Contato</p>
+          <h2 class="section-title">Vamos criar <em>memórias</em> juntos?</h2>
+          <p class="body-text">Preencha o formulário e receba um orçamento personalizado em até 24 horas. Estou ansiosa para fazer parte do seu momento especial.</p>
+
+          <div class="contact-methods">
+            <!-- WHATSAPP: substitua 5500000000000 pelo seu número (código do país + DDD + número) -->
+            <a href="https://wa.me/5548999792424" class="c-method wa" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i>
+              <div><span class="cm-title">WhatsApp</span><span class="cm-sub">Resposta mais rápida</span></div>
+            </a>
+            <!-- EMAIL: substitua pelo seu email -->
+            <a href="mailto:sthefanyramosdistribuicao@gmail.com" class="c-method">
+              <i class="fas fa-envelope"></i>
+              <div><span class="cm-title">E-mail</span><span class="cm-sub">sthefanyramosdistribuicao@gmail.com</span></div>
+            </a>
+            <!-- INSTAGRAM: substitua pelo seu @ -->
+            <a href="https://instagram.com/sthefanyramosoficial" class="c-method" target="_blank" rel="noopener">
+              <i class="fab fa-instagram"></i>
+              <div><span class="cm-title">Instagram</span><span class="cm-sub">@sthefanyramosoficial</span></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal-right">
+          <!--
+            FORMULÁRIO — Para envio gratuito, crie uma conta em https://formspree.io
+            e substitua "SEU_ID_FORMSPREE" pelo ID fornecido (ex: xpwzgqkl).
+            Plano gratuito: 50 envios/mês.
+          -->
+          <form class="cform" id="cform" action="https://formspree.io/f/xpqkekzq" method="POST">
+            <div class="form-row">
+              <div class="fg">
+                <label for="nome">Seu Nome *</label>
+                <input type="text" id="nome" name="nome" required placeholder="Ana Silva">
+              </div>
+              <div class="fg">
+                <label for="telefone">WhatsApp *</label>
+                <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+              </div>
+            </div>
+            <div class="fg">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com">
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label for="tipo">Tipo de Evento *</label>
+                <select id="tipo" name="tipo_evento" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="casamento">Cerimônia de Casamento</option>
+                  <option value="ministerio">Ministração em Igreja</option>
+                  <option value="corporativo">Evento Corporativo</option>
+                  <option value="social">Evento Social / Formatura</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label for="data">Data do Evento *</label>
+                <input type="date" id="data" name="data_evento" required>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="local">Local do Evento *</label>
+              <input type="text" id="local" name="local" required placeholder="Igreja / Espaço — Cidade, Estado">
+            </div>
+            <div class="fg">
+              <label for="msg">Conte-me mais sobre o seu evento</label>
+              <textarea id="msg" name="mensagem" rows="4" placeholder="Descreva seu evento, músicas desejadas, número de convidados..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+              <i class="fas fa-paper-plane"></i> Solicitar Orçamento
+            </button>
+            <p class="form-note">* Campos obrigatórios. Responderei em até 24 horas.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <span class="footer-logo">Sthefany</span>
+          <span class="footer-logo-last">Ramos</span>
+          <p class="footer-sub">Uma Voz Dessa Geração</p>
+          <p class="footer-bio">Transformando momentos em memórias eternas através da música.</p>
+          <div class="footer-social">
+            <!-- REDES SOCIAIS: substitua os href pelos seus links -->
+            <a href="https://instagram.com/sthefanyramosoficial" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@sthefanyramosoficial" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com/sthefanyramosoficial" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://open.spotify.com" aria-label="Spotify" target="_blank" rel="noopener"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Quem sou eu?</a></li>
+            <li><a href="#casamentos">Casamentos</a></li>
+            <li><a href="#ministerio">Ministério</a></li>
+            <li><a href="#multimidia">Multimídia</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Serviços</h4>
+          <ul>
+            <li>Cerimônias de Casamento</li>
+            <li>Ministrações em Igrejas</li>
+            <li>Eventos Corporativos</li>
+            <li>Jantares &amp; Recepções</li>
+            <li>Formaturas</li>
+            <li>Retiros &amp; Conferências</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contato Rápido</h4>
+          <!-- WHATSAPP: substitua o número -->
+          <a href="https://wa.me/5548999792424" class="footer-wa" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+          </a>
+          <p class="footer-hours">Atendimento:<br>Seg a Sex, 9h–18h<br>Sáb, 9h–13h</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 Sthefany Ramos — Todos os direitos reservados.</p>
+        <p>Desenvolvido com amor</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== WHATSAPP FLUTUANTE ========== -->
+  <!-- WHATSAPP: substitua o número e o texto da mensagem -->
+  <a href="https://wa.me/5548999792424?text=Olá!%20Vim%20pelo%20site%20da%20Sthefany%20Ramos%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços."
+     class="wa-float" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tip">Fale comigo!</span>
+  </a>
+
+  <!-- VOLTAR AO TOPO -->
+  <button class="back-top" id="back-top" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Luxury libs — self-hosted, sem dependência de CDN externa -->
+  <script src="js/vendor/lenis.min.js"></script>
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
