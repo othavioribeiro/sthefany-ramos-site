@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Builder — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sb:#16161e;--sb-h:#1e1e2a;--sb-a:#25253a;
+  --bg:#f0efe8;--card:#fff;--accent:#C9956C;--accent-d:#A67A52;
+  --txt:#1a1a2e;--muted:#6b6b80;--border:#e2e0d8;--inp:#faf9f6;
+  --hdr:#1a1a2e;--sh:0 2px 12px rgba(0,0,0,.07);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);height:100vh;overflow:hidden;display:flex;flex-direction:column;}
+/* TOPBAR */
+#topbar{height:52px;background:var(--hdr);display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:8px;}
+.brand-diamond{color:var(--accent);font-size:.9rem;}
+.brand-name{color:#fff;font-weight:700;font-size:.92rem;letter-spacing:.04em;}
+.brand-sub{color:rgba(255,255,255,.3);font-size:.65rem;margin-left:4px;}
+.topbar-r{display:flex;gap:7px;align-items:center;}
+.btn-top{padding:6px 13px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;border:none;display:flex;align-items:center;gap:6px;transition:all .2s;font-family:'Inter',sans-serif;}
+.btn-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);}
+.btn-ghost:hover{background:rgba(255,255,255,.13);color:#fff;}
+.btn-prev{background:rgba(201,149,108,.15);color:var(--accent);border:1px solid rgba(201,149,108,.28);}
+.btn-prev:hover{background:rgba(201,149,108,.25);}
+.btn-dl{background:var(--accent);color:#fff;}
+.btn-dl:hover{background:var(--accent-d);}
+/* LAYOUT */
+#layout{display:flex;flex:1;overflow:hidden;}
+/* SIDEBAR */
+#sidebar{width:210px;background:var(--sb);overflow-y:auto;flex-shrink:0;padding:10px 0;}
+#sidebar::-webkit-scrollbar{width:4px;}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+.sb-section{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:14px 14px 5px;}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;cursor:pointer;color:rgba(255,255,255,.5);font-size:.8rem;font-weight:500;transition:all .18s;border-left:3px solid transparent;}
+.sb-item:hover{background:var(--sb-h);color:rgba(255,255,255,.85);}
+.sb-item.active{background:var(--sb-a);color:#fff;border-left-color:var(--accent);}
+.sb-item i{width:15px;text-align:center;font-size:.75rem;opacity:.65;}
+.sb-item.active i{opacity:1;color:var(--accent);}
+/* CONTENT */
+#content{flex:1;overflow-y:auto;padding:26px 30px;}
+#content::-webkit-scrollbar{width:6px;}
+#content::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:3px;}
+.panel{display:none;}
+.panel.active{display:block;}
+.panel-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:400;margin-bottom:4px;}
+.panel-desc{font-size:.8rem;color:var(--muted);margin-bottom:22px;}
+/* FORM CARD */
+.fcard{background:var(--card);border-radius:10px;padding:20px 22px;margin-bottom:16px;box-shadow:var(--sh);border:1px solid var(--border);}
+.fcard-t{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.fcard-t::after{content:'';flex:1;height:1px;background:var(--border);}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;}
+.fg:last-child{margin-bottom:0;}
+.fg label{font-size:.68rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+.fg input,.fg select,.fg textarea{padding:8px 11px;border:1.5px solid var(--border);border-radius:6px;background:var(--inp);font-family:'Inter',sans-serif;font-size:.85rem;color:var(--txt);outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px rgba(201,149,108,.1);}
+.fg textarea{resize:vertical;min-height:76px;line-height:1.6;}
+.fg small{font-size:.68rem;color:var(--muted);margin-top:2px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.span2{grid-column:span 2;}
+/* COLOR INPUT */
+.ci{display:flex;gap:8px;align-items:center;}
+.ci input[type="color"]{width:36px;height:36px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;padding:2px;background:none;flex-shrink:0;}
+.ci input[type="text"]{flex:1;font-family:monospace;font-size:.82rem;}
+/* PALETTES */
+.palettes{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.pal-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;background:var(--card);font-size:.7rem;font-weight:600;color:var(--muted);transition:all .2s;}
+.pal-btn:hover{border-color:var(--accent);color:var(--accent-d);}
+.pal-dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.12);}
+/* FONT PREVIEW */
+.font-prev{margin-top:6px;padding:8px 12px;background:var(--inp);border:1px solid var(--border);border-radius:6px;font-size:1.05rem;color:var(--txt);min-height:38px;}
+/* TESTIMONIAL / FAQ cards */
+.inner-card{background:var(--inp);border:1.5px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;}
+.inner-card:last-child{margin-bottom:0;}
+.inner-card-t{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+/* BADGE SELECTOR */
+.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
+.badge-opt{padding:4px 11px;border-radius:20px;border:1.5px solid var(--border);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .2s;background:var(--card);color:var(--muted);}
+.badge-opt.sel{border-color:var(--accent);color:var(--accent-d);background:rgba(201,149,108,.08);}
+/* INFO BOX */
+.info-box{background:rgba(201,149,108,.07);border:1px solid rgba(201,149,108,.18);border-radius:8px;padding:12px 14px;font-size:.8rem;color:#7a5c40;margin-bottom:16px;display:flex;gap:9px;align-items:flex-start;line-height:1.6;}
+.info-box i{color:var(--accent);margin-top:1px;flex-shrink:0;}
+/* INSTRUCTIONS */
+.step{display:flex;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.step-n{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-c h4{font-size:.85rem;font-weight:600;margin-bottom:3px;}
+.step-c p{font-size:.78rem;color:var(--muted);line-height:1.65;}
+.step-c code{background:var(--inp);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-family:monospace;font-size:.76rem;}
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">
+    <span class="brand-diamond">◆</span>
+    <span class="brand-name">Studio Builder</span>
+    <span class="brand-sub">v1.0</span>
+  </div>
+  <div class="topbar-r">
+    <label class="btn-top btn-ghost" style="cursor:pointer">
+      <i class="fas fa-upload"></i> Importar JSON
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importConfig(event)">
+    </label>
+    <button class="btn-top btn-ghost" onclick="exportConfig()"><i class="fas fa-download"></i> Exportar JSON</button>
+    <button class="btn-top btn-prev" onclick="previewSite()"><i class="fas fa-eye"></i> Pré-visualizar</button>
+    <button class="btn-top btn-dl" onclick="downloadSite()"><i class="fas fa-file-code"></i> Baixar index.html</button>
+  </div>
+</header>
+
+<div id="layout">
+  <nav id="sidebar">
+    <div class="sb-section">Configuração</div>
+    <div class="sb-item active" data-panel="identidade"><i class="fas fa-user"></i> Identidade</div>
+    <div class="sb-item" data-panel="cores"><i class="fas fa-palette"></i> Cores & Tema</div>
+    <div class="sb-item" data-panel="tipografia"><i class="fas fa-font"></i> Tipografia</div>
+    <div class="sb-section">Seções do Site</div>
+    <div class="sb-item" data-panel="hero"><i class="fas fa-image"></i> Hero</div>
+    <div class="sb-item" data-panel="marquee"><i class="fas fa-scroll"></i> Barra de Valores</div>
+    <div class="sb-item" data-panel="sobre"><i class="fas fa-address-card"></i> Sobre / Bio</div>
+    <div class="sb-item" data-panel="svc1"><i class="fas fa-star"></i> Serviço 1</div>
+    <div class="sb-item" data-panel="svc2"><i class="fas fa-star-half-alt"></i> Serviço 2</div>
+    <div class="sb-item" data-panel="svc3"><i class="fas fa-certificate"></i> Serviço 3</div>
+    <div class="sb-item" data-panel="midia"><i class="fas fa-photo-video"></i> Multimídia</div>
+    <div class="sb-item" data-panel="depoimentos"><i class="fas fa-comments"></i> Depoimentos</div>
+    <div class="sb-item" data-panel="faq"><i class="fas fa-question-circle"></i> FAQ</div>
+    <div class="sb-item" data-panel="contato"><i class="fas fa-envelope"></i> Contato</div>
+    <div class="sb-item" data-panel="footer"><i class="fas fa-layer-group"></i> Footer</div>
+    <div class="sb-item" data-panel="seo"><i class="fas fa-search"></i> SEO</div>
+    <div class="sb-section">Ajuda</div>
+    <div class="sb-item" data-panel="instrucoes"><i class="fas fa-book"></i> Como usar</div>
+  </nav>
+
+  <main id="content">
+
+    <!-- IDENTIDADE -->
+    <div class="panel active" id="panel-identidade">
+      <div class="panel-title">Identidade & Marca</div>
+      <div class="panel-desc">Nome do cliente e informações principais que aparecem no cabeçalho e rodapé.</div>
+      <div class="fcard">
+        <div class="fcard-t">Nome</div>
+        <div class="grid2">
+          <div class="fg"><label>Primeiro Nome</label><input type="text" id="PRIMEIRO_NOME" placeholder="Sthefany"></div>
+          <div class="fg"><label>Sobrenome</label><input type="text" id="SOBRENOME" placeholder="Ramos"></div>
+          <div class="fg span2"><label>Nome Completo (exibido no nav e footer)</label><input type="text" id="NOME_COMPLETO" placeholder="Sthefany Ramos"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Textos de Marca</div>
+        <div class="fg"><label>Subtítulo / Slogan</label><input type="text" id="SUBTITULO" placeholder="Uma Voz Dessa Geração"><small>Aparece abaixo do nome no menu e no footer</small></div>
+        <div class="fg"><label>Papel / Função</label><input type="text" id="HERO_PRE" placeholder="Cantora & Ministra"><small>Aparece no hero, acima do nome principal</small></div>
+        <div class="fg"><label>Link do nav "Sobre"</label><input type="text" id="NAV_SOBRE" placeholder="Quem sou eu?"></div>
+        <div class="fg"><label>Texto do botão CTA no menu</label><input type="text" id="NAV_CTA" placeholder="Solicitar Orçamento"></div>
+      </div>
+    </div>
+
+    <!-- CORES -->
+    <div class="panel" id="panel-cores">
+      <div class="panel-title">Cores & Tema</div>
+      <div class="panel-desc">Define toda a identidade visual do site via CSS variables.</div>
+      <div class="fcard">
+        <div class="fcard-t">Paletas Pré-definidas</div>
+        <div class="palettes">
+          <button class="pal-btn" onclick="applyPalette('rosegold')"><span class="pal-dot" style="background:#C9956C"></span><span class="pal-dot" style="background:#FAF8F4"></span><span class="pal-dot" style="background:#2C2416"></span> Rosé Gold</button>
+          <button class="pal-btn" onclick="applyPalette('navy')"><span class="pal-dot" style="background:#2E5077"></span><span class="pal-dot" style="background:#F4F7FB"></span><span class="pal-dot" style="background:#0D1B2A"></span> Azul Marinho</button>
+          <button class="pal-btn" onclick="applyPalette('emerald')"><span class="pal-dot" style="background:#2D7D6E"></span><span class="pal-dot" style="background:#F2FAF8"></span><span class="pal-dot" style="background:#0F2E28"></span> Esmeralda</button>
+          <button class="pal-btn" onclick="applyPalette('royal')"><span class="pal-dot" style="background:#6B3D8C"></span><span class="pal-dot" style="background:#F8F4FC"></span><span class="pal-dot" style="background:#2A1040"></span> Roxo Royal</button>
+          <button class="pal-btn" onclick="applyPalette('burgundy')"><span class="pal-dot" style="background:#8B2635"></span><span class="pal-dot" style="background:#FBF6F7"></span><span class="pal-dot" style="background:#2C0A10"></span> Borgonha</button>
+          <button class="pal-btn" onclick="applyPalette('gold')"><span class="pal-dot" style="background:#B8962E"></span><span class="pal-dot" style="background:#FBF9F2"></span><span class="pal-dot" style="background:#2C2008"></span> Dourado</button>
+          <button class="pal-btn" onclick="applyPalette('slate')"><span class="pal-dot" style="background:#4A6FA5"></span><span class="pal-dot" style="background:#F4F5F8"></span><span class="pal-dot" style="background:#1A2030"></span> Ardósia</button>
+          <button class="pal-btn" onclick="applyPalette('mono')"><span class="pal-dot" style="background:#333333"></span><span class="pal-dot" style="background:#F8F8F8"></span><span class="pal-dot" style="background:#111111"></span> Monocromático</button>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Cor Primária (Destaque)</div>
+        <div class="grid3">
+          <div class="fg"><label>Primária</label><div class="ci"><input type="color" id="COR_P_picker" oninput="syncColor('COR_P')"><input type="text" id="COR_P" placeholder="#C9956C" oninput="syncColorPicker('COR_P')"></div></div>
+          <div class="fg"><label>Primária Clara</label><div class="ci"><input type="color" id="COR_P_CLARA_picker" oninput="syncColor('COR_P_CLARA')"><input type="text" id="COR_P_CLARA" placeholder="#E8C5A8" oninput="syncColorPicker('COR_P_CLARA')"></div></div>
+          <div class="fg"><label>Primária Escura</label><div class="ci"><input type="color" id="COR_P_ESCURA_picker" oninput="syncColor('COR_P_ESCURA')"><input type="text" id="COR_P_ESCURA" placeholder="#A67A52" oninput="syncColorPicker('COR_P_ESCURA')"></div></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Cores de Fundo & Texto</div>
+        <div class="grid2">
+          <div class="fg"><label>Fundo Principal</label><div class="ci"><input type="color" id="COR_FUNDO_picker" oninput="syncColor('COR_FUNDO')"><input type="text" id="COR_FUNDO" placeholder="#FAF8F4" oninput="syncColorPicker('COR_FUNDO')"></div></div>
+          <div class="fg"><label>Fundo Secundário</label><div class="ci"><input type="color" id="COR_FUNDO2_picker" oninput="syncColor('COR_FUNDO2')"><input type="text" id="COR_FUNDO2" placeholder="#F3EDE5" oninput="syncColorPicker('COR_FUNDO2')"></div></div>
+          <div class="fg"><label>Texto Principal</label><div class="ci"><input type="color" id="COR_TEXTO_picker" oninput="syncColor('COR_TEXTO')"><input type="text" id="COR_TEXTO" placeholder="#2C2416" oninput="syncColorPicker('COR_TEXTO')"></div></div>
+          <div class="fg"><label>Texto Médio</label><div class="ci"><input type="color" id="COR_TEXTO_MED_picker" oninput="syncColor('COR_TEXTO_MED')"><input type="text" id="COR_TEXTO_MED" placeholder="#5C5044" oninput="syncColorPicker('COR_TEXTO_MED')"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIPOGRAFIA -->
+    <div class="panel" id="panel-tipografia">
+      <div class="panel-title">Tipografia</div>
+      <div class="panel-desc">Fontes do Google Fonts. A combinação muda completamente o caráter visual do site.</div>
+      <div class="fcard">
+        <div class="fcard-t">Fonte de Título (Display)</div>
+        <div class="fg"><label>Escolha a fonte</label>
+          <select id="FONT_DISPLAY_sel" onchange="updateFont('display')">
+            <option value="playfair">Playfair Display — Elegante, editorial</option>
+            <option value="cormorant">Cormorant Garamond — Ultra refinada, moda</option>
+            <option value="lora">Lora — Quente, literária</option>
+            <option value="garamond">EB Garamond — Clássica, acadêmica</option>
+            <option value="baskerville">Libre Baskerville — Profissional, sólida</option>
+          </select>
+        </div>
+        <div id="prev-display" class="font-prev">O amor transforma momentos em eternidade</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Fonte de Destaque / Logo (Accent)</div>
+        <div class="fg"><label>Escolha a fonte</label>
+          <select id="FONT_ACCENT_sel" onchange="updateFont('accent')">
+            <option value="greatvibes">Great Vibes — Fluida, romântica</option>
+            <option value="dancing">Dancing Script — Descontraída, amigável</option>
+            <option value="sacramento">Sacramento — Elegante, delicada</option>
+            <option value="allura">Allura — Casamento, luxo</option>
+            <option value="pacifico">Pacifico — Casual, divertida</option>
+          </select>
+        </div>
+        <div id="prev-accent" class="font-prev" style="font-size:1.8rem">Sthefany Ramos</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Fonte do Corpo (Body)</div>
+        <div class="fg"><label>Escolha a fonte</label>
+          <select id="FONT_BODY_sel" onchange="updateFont('body')">
+            <option value="raleway">Raleway — Clean, fashion</option>
+            <option value="poppins">Poppins — Moderna, geométrica</option>
+            <option value="nunito">Nunito — Amigável, arredondada</option>
+            <option value="inter">Inter — Técnica, neutra</option>
+            <option value="montserrat">Montserrat — Forte, versátil</option>
+          </select>
+        </div>
+        <div id="prev-body" class="font-prev" style="font-size:.9rem">Transformando momentos em memórias eternas através da música e da dedicação.</div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="panel" id="panel-hero">
+      <div class="panel-title">Seção Hero</div>
+      <div class="panel-desc">Primeira tela do site — slideshow de fotos com nome e botões de ação.</div>
+      <div class="fcard">
+        <div class="fcard-t">Textos</div>
+        <div class="fg"><label>Tagline (frase abaixo do nome)</label><input type="text" id="HERO_TAGLINE" placeholder="Transformando momentos em memórias através da voz"></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Botões de Ação</div>
+        <div class="grid2">
+          <div class="fg"><label>Botão 1 — Texto</label><input type="text" id="H_B1T" placeholder="Cerimônias"></div>
+          <div class="fg"><label>Botão 1 — Link</label><input type="text" id="H_B1H" placeholder="#servico1"></div>
+          <div class="fg"><label>Botão 2 — Texto</label><input type="text" id="H_B2T" placeholder="Ministério"></div>
+          <div class="fg"><label>Botão 2 — Link</label><input type="text" id="H_B2H" placeholder="#servico2"></div>
+          <div class="fg"><label>Botão 3 — Texto</label><input type="text" id="H_B3T" placeholder="Assista"></div>
+          <div class="fg"><label>Botão 3 — Link</label><input type="text" id="H_B3H" placeholder="#multimidia"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Fotos do Slideshow (caminhos relativos)</div>
+        <div class="info-box"><i class="fas fa-info-circle"></i>Use caminhos como <strong>images/foto1.jpg</strong>. Coloque as imagens na pasta <code>images/</code> do projeto do cliente.</div>
+        <div class="fg"><label>Imagem 1</label><input type="text" id="HERO_IMG1" placeholder="images/casamento1.jpg"></div>
+        <div class="fg"><label>Imagem 2</label><input type="text" id="HERO_IMG2" placeholder="images/ministerio.jpg"></div>
+        <div class="fg"><label>Imagem 3</label><input type="text" id="HERO_IMG3" placeholder="images/evento.jpg"></div>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="panel" id="panel-marquee">
+      <div class="panel-title">Barra de Valores</div>
+      <div class="panel-desc">Faixa animada com os diferenciais do cliente. Ícones do FontAwesome.</div>
+      <div class="info-box"><i class="fas fa-info-circle"></i>Use classes FontAwesome sem o prefixo "fas fa-". Ex: <code>fa-music</code>, <code>fa-star</code>, <code>fa-camera</code>, <code>fa-heart</code>.</div>
+      <div class="fcard">
+        <div class="fcard-t">5 Itens</div>
+        <div class="grid2">
+          <div class="fg"><label>Ícone 1</label><input type="text" id="MQ1I" placeholder="fa-music"></div>
+          <div class="fg"><label>Texto 1</label><input type="text" id="MQ1T" placeholder="Repertório Personalizado"></div>
+          <div class="fg"><label>Ícone 2</label><input type="text" id="MQ2I" placeholder="fa-comments"></div>
+          <div class="fg"><label>Texto 2</label><input type="text" id="MQ2T" placeholder="Depoimentos Reais"></div>
+          <div class="fg"><label>Ícone 3</label><input type="text" id="MQ3I" placeholder="fa-star"></div>
+          <div class="fg"><label>Texto 3</label><input type="text" id="MQ3T" placeholder="Profissional Certificada"></div>
+          <div class="fg"><label>Ícone 4</label><input type="text" id="MQ4I" placeholder="fa-shield-alt"></div>
+          <div class="fg"><label>Texto 4</label><input type="text" id="MQ4T" placeholder="Qualidade Garantida"></div>
+          <div class="fg"><label>Ícone 5</label><input type="text" id="MQ5I" placeholder="fa-map-marker-alt"></div>
+          <div class="fg"><label>Texto 5</label><input type="text" id="MQ5T" placeholder="Atende Todo o Brasil"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOBRE -->
+    <div class="panel" id="panel-sobre">
+      <div class="panel-title">Sobre / Bio</div>
+      <div class="panel-desc">Seção "Quem sou eu" com foto, texto e estatísticas.</div>
+      <div class="fcard">
+        <div class="fcard-t">Cabeçalho</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag (acima do título)</label><input type="text" id="SOBRE_TAG" placeholder="Quem sou eu?"></div>
+          <div class="fg"><label>Foto (caminho)</label><input type="text" id="SOBRE_FOTO" placeholder="images/foto-sobre.jpg"></div>
+          <div class="fg"><label>Título — Parte normal</label><input type="text" id="SOBRE_H" placeholder="Uma voz que"></div>
+          <div class="fg"><label>Título — Parte em itálico</label><input type="text" id="SOBRE_H_EM" placeholder="toca a alma"></div>
+          <div class="fg span2"><label>Alt text da foto</label><input type="text" id="SOBRE_FOTO_ALT" placeholder="Nome do cliente — Profissão"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Parágrafos da Bio</div>
+        <div class="fg"><label>Parágrafo 1</label><textarea id="SOBRE_P1" rows="3"></textarea></div>
+        <div class="fg"><label>Parágrafo 2</label><textarea id="SOBRE_P2" rows="3"></textarea></div>
+        <div class="fg"><label>Parágrafo 3</label><textarea id="SOBRE_P3" rows="3"></textarea></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Estatísticas (3 números de destaque)</div>
+        <div class="grid3">
+          <div class="fg"><label>Número 1</label><input type="text" id="S1N" placeholder="5+"></div>
+          <div class="fg"><label>Número 2</label><input type="text" id="S2N" placeholder="1M+"></div>
+          <div class="fg"><label>Número 3</label><input type="text" id="S3N" placeholder="100%"></div>
+          <div class="fg"><label>Label 1</label><input type="text" id="S1L" placeholder="Anos de carreira"></div>
+          <div class="fg"><label>Label 2</label><input type="text" id="S2L" placeholder="Views no YouTube"></div>
+          <div class="fg"><label>Label 3</label><input type="text" id="S3L" placeholder="Sempre ao vivo"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVIÇO 1 -->
+    <div class="panel" id="panel-svc1">
+      <div class="panel-title">Serviço 1</div>
+      <div class="panel-desc">Primeiro serviço — exibido com vídeo loop vertical à direita.</div>
+      <div class="fcard">
+        <div class="fcard-t">Conteúdo</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="SVC1_TAG" placeholder="Para Noivas"></div>
+          <div class="fg"><label>Vídeo loop (MP4)</label><input type="text" id="SVC1_VIDEO" placeholder="images/loop-casamentos.mp4"></div>
+          <div class="fg span2"><label>Título</label><input type="text" id="SVC1_H" placeholder="Cerimônias de Casamento"></div>
+          <div class="fg span2"><label>Descrição</label><textarea id="SVC1_DESC" rows="2"></textarea></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">5 Diferenciais</div>
+        <div class="fg"><input type="text" id="SVC1_F1" placeholder="Diferencial 1"></div>
+        <div class="fg"><input type="text" id="SVC1_F2" placeholder="Diferencial 2"></div>
+        <div class="fg"><input type="text" id="SVC1_F3" placeholder="Diferencial 3"></div>
+        <div class="fg"><input type="text" id="SVC1_F4" placeholder="Diferencial 4"></div>
+        <div class="fg"><input type="text" id="SVC1_F5" placeholder="Diferencial 5"></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Botão CTA</div>
+        <div class="grid2">
+          <div class="fg"><label>Texto</label><input type="text" id="SVC1_BTEXT" placeholder="Solicitar Orçamento"></div>
+          <div class="fg"><label>Link</label><input type="text" id="SVC1_BHREF" placeholder="#contato"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVIÇO 2 -->
+    <div class="panel" id="panel-svc2">
+      <div class="panel-title">Serviço 2</div>
+      <div class="panel-desc">Segundo serviço — fundo acinzentado, vídeo YouTube + foto à direita.</div>
+      <div class="fcard">
+        <div class="fcard-t">Conteúdo</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="SVC2_TAG" placeholder="Para Igrejas & Ministérios"></div>
+          <div class="fg"><label>YouTube ID</label><input type="text" id="SVC2_YT_ID" placeholder="KABJcP7TnC0"><small>Só o ID: youtube.com/watch?v=<strong>KABJcP7TnC0</strong></small></div>
+          <div class="fg span2"><label>Título</label><input type="text" id="SVC2_H" placeholder="Ministrações & Adoração"></div>
+          <div class="fg span2"><label>Título do vídeo (acessibilidade)</label><input type="text" id="SVC2_YT_TITULO" placeholder="Nome — Vídeo principal"></div>
+          <div class="fg span2"><label>Legenda do vídeo</label><input type="text" id="SVC2_YT_CAPTION" placeholder="A música que o Senhor colocou no meu coração"></div>
+          <div class="fg span2"><label>Descrição</label><textarea id="SVC2_DESC" rows="2"></textarea></div>
+          <div class="fg"><label>Foto (caminho)</label><input type="text" id="SVC2_FOTO" placeholder="images/ministerio.jpg"></div>
+          <div class="fg"><label>Alt text da foto</label><input type="text" id="SVC2_FOTO_ALT" placeholder="Cliente em ação"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">5 Diferenciais</div>
+        <div class="fg"><input type="text" id="SVC2_F1" placeholder="Diferencial 1"></div>
+        <div class="fg"><input type="text" id="SVC2_F2" placeholder="Diferencial 2"></div>
+        <div class="fg"><input type="text" id="SVC2_F3" placeholder="Diferencial 3"></div>
+        <div class="fg"><input type="text" id="SVC2_F4" placeholder="Diferencial 4"></div>
+        <div class="fg"><input type="text" id="SVC2_F5" placeholder="Diferencial 5"></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Botão CTA</div>
+        <div class="grid2">
+          <div class="fg"><label>Texto</label><input type="text" id="SVC2_BTEXT" placeholder="Entrar em Contato"></div>
+          <div class="fg"><label>Link</label><input type="text" id="SVC2_BHREF" placeholder="#contato"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVIÇO 3 -->
+    <div class="panel" id="panel-svc3">
+      <div class="panel-title">Serviço 3</div>
+      <div class="panel-desc">Terceiro serviço — grade de duas imagens à direita.</div>
+      <div class="fcard">
+        <div class="fcard-t">Conteúdo</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="SVC3_TAG" placeholder="Eventos Corporativos & Sociais"></div>
+          <div class="fg"><label>Imagem 1 (caminho)</label><input type="text" id="SVC3_IMG1" placeholder="images/evento1.jpg"></div>
+          <div class="fg span2"><label>Título</label><input type="text" id="SVC3_H" placeholder="Elegância em cada ocasião"></div>
+          <div class="fg"><label>Alt texto imagem 1</label><input type="text" id="SVC3_IMG1_ALT" placeholder="Evento social"></div>
+          <div class="fg"><label>Imagem 2 (caminho)</label><input type="text" id="SVC3_IMG2" placeholder="images/evento2.jpg"></div>
+          <div class="fg"><label>Alt texto imagem 2</label><input type="text" id="SVC3_IMG2_ALT" placeholder="Evento corporativo"></div>
+          <div class="fg span2"><label>Descrição</label><textarea id="SVC3_DESC" rows="2"></textarea></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">5 Diferenciais</div>
+        <div class="fg"><input type="text" id="SVC3_F1" placeholder="Diferencial 1"></div>
+        <div class="fg"><input type="text" id="SVC3_F2" placeholder="Diferencial 2"></div>
+        <div class="fg"><input type="text" id="SVC3_F3" placeholder="Diferencial 3"></div>
+        <div class="fg"><input type="text" id="SVC3_F4" placeholder="Diferencial 4"></div>
+        <div class="fg"><input type="text" id="SVC3_F5" placeholder="Diferencial 5"></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Botão CTA</div>
+        <div class="grid2">
+          <div class="fg"><label>Texto</label><input type="text" id="SVC3_BTEXT" placeholder="Solicitar Orçamento"></div>
+          <div class="fg"><label>Link</label><input type="text" id="SVC3_BHREF" placeholder="#contato"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MULTIMÍDIA -->
+    <div class="panel" id="panel-midia">
+      <div class="panel-title">Multimídia</div>
+      <div class="panel-desc">Vídeos do YouTube e galeria de fotos/vídeos.</div>
+      <div class="fcard">
+        <div class="fcard-t">Vídeos em Destaque (YouTube)</div>
+        <div class="grid2">
+          <div class="fg"><label>YouTube ID 1</label><input type="text" id="YT1_ID" placeholder="_KVrOmwN_Tg"><small>ID do vídeo após ?v=</small></div>
+          <div class="fg"><label>Título do vídeo 1</label><input type="text" id="YT1_TITULO" placeholder="Nome — Ao Vivo"></div>
+          <div class="fg"><label>YouTube ID 2</label><input type="text" id="YT2_ID" placeholder="KABJcP7TnC0"></div>
+          <div class="fg"><label>Título do vídeo 2</label><input type="text" id="YT2_TITULO" placeholder="Nome — Apresentação Especial"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Canal YouTube</div>
+        <div class="grid2">
+          <div class="fg"><label>URL do canal</label><input type="text" id="YT_CANAL_URL" placeholder="https://youtube.com/@handle"></div>
+          <div class="fg"><label>Handle exibido</label><input type="text" id="YT_CANAL_HANDLE" placeholder="@seucanal"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Galeria (7 itens — fotos ou vídeos MP4)</div>
+        <div class="grid2">
+          <div class="fg"><label>Imagem 1 (tall)</label><input type="text" id="GAL_IMG1" placeholder="images/foto-sobre.jpg"></div>
+          <div class="fg"><label>Alt 1</label><input type="text" id="GAL_ALT1" placeholder="Descrição da foto"></div>
+          <div class="fg"><label>Imagem 2</label><input type="text" id="GAL_IMG2" placeholder="images/evento1.jpg"></div>
+          <div class="fg"><label>Alt 2</label><input type="text" id="GAL_ALT2" placeholder="Descrição da foto"></div>
+          <div class="fg"><label>Imagem 3</label><input type="text" id="GAL_IMG3" placeholder="images/casamento1.jpg"></div>
+          <div class="fg"><label>Alt 3</label><input type="text" id="GAL_ALT3" placeholder="Descrição da foto"></div>
+          <div class="fg"><label>Imagem 4 (tall)</label><input type="text" id="GAL_IMG4" placeholder="images/loop.mp4"></div>
+          <div class="fg"><label>Alt 4</label><input type="text" id="GAL_ALT4" placeholder="Descrição"></div>
+          <div class="fg"><label>Imagem 5</label><input type="text" id="GAL_IMG5" placeholder="images/ministerio.jpg"></div>
+          <div class="fg"><label>Alt 5</label><input type="text" id="GAL_ALT5" placeholder="Descrição da foto"></div>
+          <div class="fg"><label>Imagem 6</label><input type="text" id="GAL_IMG6" placeholder="images/loop2.mp4"></div>
+          <div class="fg"><label>Alt 6</label><input type="text" id="GAL_ALT6" placeholder="Descrição"></div>
+          <div class="fg"><label>Imagem 7</label><input type="text" id="GAL_IMG7" placeholder="images/evento2.jpg"></div>
+          <div class="fg"><label>Alt 7</label><input type="text" id="GAL_ALT7" placeholder="Descrição da foto"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPOIMENTOS -->
+    <div class="panel" id="panel-depoimentos">
+      <div class="panel-title">Depoimentos</div>
+      <div class="panel-desc">4 cards em carrossel. Escolha o tipo de badge para cada um.</div>
+      <div class="fcard">
+        <div class="fcard-t">Cabeçalho da Seção</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="TEST_TAG" placeholder="Depoimentos"></div>
+          <div class="fg"><label>Título — parte normal</label><input type="text" id="TEST_H" placeholder="O que dizem sobre"></div>
+          <div class="fg span2"><label>Título — parte em itálico</label><input type="text" id="TEST_H_EM" placeholder="minha voz"></div>
+        </div>
+      </div>
+      <div id="test-cards"></div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="panel" id="panel-faq">
+      <div class="panel-title">FAQ</div>
+      <div class="panel-desc">6 perguntas e respostas frequentes.</div>
+      <div class="fcard">
+        <div class="fcard-t">Cabeçalho da Seção</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="FAQ_TAG" placeholder="Dúvidas Frequentes"></div>
+          <div class="fg"><label>Título — parte normal</label><input type="text" id="FAQ_H" placeholder="Tudo que você precisa"></div>
+          <div class="fg span2"><label>Título — parte em itálico</label><input type="text" id="FAQ_H_EM" placeholder="saber"></div>
+        </div>
+      </div>
+      <div id="faq-items"></div>
+    </div>
+
+    <!-- CONTATO -->
+    <div class="panel" id="panel-contato">
+      <div class="panel-title">Contato</div>
+      <div class="panel-desc">Formulário, canais de contato e WhatsApp flutuante.</div>
+      <div class="fcard">
+        <div class="fcard-t">Cabeçalho da Seção</div>
+        <div class="grid2">
+          <div class="fg"><label>Tag</label><input type="text" id="C_TAG" placeholder="Contato"></div>
+          <div class="fg"><label>Título — parte normal</label><input type="text" id="C_H" placeholder="Vamos criar"></div>
+          <div class="fg"><label>Título — parte em itálico</label><input type="text" id="C_H_EM" placeholder="memórias juntos?"></div>
+          <div class="fg span2"><label>Descrição</label><textarea id="C_DESC" rows="2" placeholder="Preencha o formulário e receba um orçamento personalizado em até 24 horas."></textarea></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Canais de Contato</div>
+        <div class="grid2">
+          <div class="fg"><label>WhatsApp (só dígitos)</label><input type="text" id="WA_NUM" placeholder="5548999999999"><small>Código do país + DDD + número</small></div>
+          <div class="fg"><label>E-mail</label><input type="text" id="C_EMAIL" placeholder="contato@email.com"></div>
+          <div class="fg"><label>Instagram URL</label><input type="text" id="IG_URL" placeholder="https://instagram.com/handle"></div>
+          <div class="fg"><label>Instagram Handle</label><input type="text" id="IG_HANDLE" placeholder="@handle"></div>
+          <div class="fg"><label>Formspree ID</label><input type="text" id="FORMSPREE_ID" placeholder="xpqkekzq"><small>Crie em formspree.io — plano gratuito 50 envios/mês</small></div>
+          <div class="fg"><label>Texto do botão do formulário</label><input type="text" id="C_FORM_BTN" placeholder="Solicitar Orçamento"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">WhatsApp Flutuante</div>
+        <div class="grid2">
+          <div class="fg span2"><label>Mensagem pré-preenchida (sem encoding)</label><input type="text" id="WA_MSG" placeholder="Olá! Vim pelo site e gostaria de saber mais."></div>
+          <div class="fg"><label>Tooltip do botão</label><input type="text" id="WA_TIP" placeholder="Fale comigo!"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="panel" id="panel-footer">
+      <div class="panel-title">Footer</div>
+      <div class="panel-desc">Rodapé com redes sociais, links de serviços e horário de atendimento.</div>
+      <div class="fcard">
+        <div class="fcard-t">Bio e Redes Sociais</div>
+        <div class="fg"><label>Bio do footer</label><textarea id="F_BIO" rows="2" placeholder="Transformando momentos em memórias eternas através da música."></textarea></div>
+        <div class="grid2">
+          <div class="fg"><label>Instagram URL</label><input type="text" id="F_IG_URL" placeholder="https://instagram.com/handle"></div>
+          <div class="fg"><label>YouTube URL</label><input type="text" id="F_YT_URL" placeholder="https://youtube.com/@handle"></div>
+          <div class="fg"><label>Facebook URL</label><input type="text" id="F_FB_URL" placeholder="https://facebook.com/pagina"></div>
+          <div class="fg"><label>Spotify URL</label><input type="text" id="F_SP_URL" placeholder="https://open.spotify.com/artist/..."></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Lista de Serviços (6 itens)</div>
+        <div class="grid2">
+          <div class="fg"><input type="text" id="F_SVC1" placeholder="Serviço 1"></div>
+          <div class="fg"><input type="text" id="F_SVC2" placeholder="Serviço 2"></div>
+          <div class="fg"><input type="text" id="F_SVC3" placeholder="Serviço 3"></div>
+          <div class="fg"><input type="text" id="F_SVC4" placeholder="Serviço 4"></div>
+          <div class="fg"><input type="text" id="F_SVC5" placeholder="Serviço 5"></div>
+          <div class="fg"><input type="text" id="F_SVC6" placeholder="Serviço 6"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Informações Finais</div>
+        <div class="grid2">
+          <div class="fg"><label>Horário de atendimento</label><textarea id="F_HORARIO" rows="3" placeholder="Atendimento:&#10;Seg a Sex, 9h–18h&#10;Sáb, 9h–13h"></textarea></div>
+          <div class="fg"><label>Ano do copyright</label><input type="text" id="F_ANO" placeholder="2025">
+          <label style="margin-top:10px">Crédito</label><input type="text" id="F_CREDITO" placeholder="Desenvolvido por Othávio Bianco"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO -->
+    <div class="panel" id="panel-seo">
+      <div class="panel-title">SEO</div>
+      <div class="panel-desc">Meta tags, Open Graph e Schema.org para melhor indexação no Google.</div>
+      <div class="fcard">
+        <div class="fcard-t">Tags Básicas</div>
+        <div class="fg"><label>Título da página</label><input type="text" id="TITULO_PAGINA" placeholder="Nome | Slogan"></div>
+        <div class="fg"><label>Meta description (até 160 caracteres)</label><textarea id="META_DESC" rows="2" placeholder="Descrição para o Google — clara, direta e com as palavras-chave principais."></textarea></div>
+        <div class="fg"><label>Meta keywords</label><input type="text" id="META_KEYWORDS" placeholder="palavra1, palavra2, palavra3"></div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Open Graph (Compartilhamento em redes sociais)</div>
+        <div class="grid2">
+          <div class="fg"><label>OG Título</label><input type="text" id="OG_TITULO" placeholder="Nome | Slogan"></div>
+          <div class="fg"><label>URL do Site</label><input type="text" id="SITE_URL" placeholder="https://dominio.com.br"></div>
+          <div class="fg span2"><label>OG Descrição</label><input type="text" id="OG_DESC" placeholder="Descrição para compartilhamento"></div>
+          <div class="fg span2"><label>OG Image URL (imagem para preview)</label><input type="text" id="OG_IMAGE" placeholder="https://dominio.com.br/images/og-cover.jpg"></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-t">Schema.org JSON-LD</div>
+        <div class="info-box"><i class="fas fa-info-circle"></i>Cole o JSON do Schema.org para o nicho do cliente. Use <a href="https://schema.org/docs/full.html" target="_blank" style="color:var(--accent-d)">schema.org</a> para encontrar o tipo certo.</div>
+        <div class="badge-row" style="margin-bottom:10px">
+          <button class="badge-opt" onclick="setSchema('music')">Músico / Artista</button>
+          <button class="badge-opt" onclick="setSchema('local')">Negócio Local</button>
+          <button class="badge-opt" onclick="setSchema('person')">Profissional Liberal</button>
+          <button class="badge-opt" onclick="setSchema('health')">Saúde & Beleza</button>
+          <button class="badge-opt" onclick="setSchema('photo')">Fotógrafo</button>
+        </div>
+        <div class="fg"><textarea id="SCHEMA_JSON" rows="8" style="font-family:monospace;font-size:.78rem"></textarea></div>
+      </div>
+    </div>
+
+    <!-- INSTRUÇÕES -->
+    <div class="panel" id="panel-instrucoes">
+      <div class="panel-title">Como usar</div>
+      <div class="panel-desc">Passo a passo para entregar um site novo para um cliente.</div>
+      <div class="fcard" style="max-width:640px">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-c"><h4>Preencha os dados do cliente</h4><p>Use o menu lateral para navegar entre as seções. Os campos já estão pré-preenchidos com o exemplo da Sthefany Ramos. Substitua com os dados do novo cliente.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-c"><h4>Defina cores e tipografia</h4><p>Use as <strong>Paletas Pré-definidas</strong> para trocar o tema completo em 1 clique, ou ajuste cor a cor. Escolha as fontes na seção Tipografia.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-c"><h4>Exporte e salve o JSON</h4><p>Clique em <strong>Exportar JSON</strong> para salvar a configuração do cliente. Guarde o arquivo — você pode reimportar para editar depois sem reescrever tudo.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-c"><h4>Baixe o index.html gerado</h4><p>Clique em <strong>Baixar index.html</strong>. O arquivo gerado já tem todas as variáveis CSS e conteúdo do cliente injetados.</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-c"><h4>Monte a pasta do cliente</h4><p>Crie uma pasta e copie para dentro:<br>• O <code>index.html</code> gerado<br>• A pasta <code>css/</code> (do projeto base)<br>• A pasta <code>js/</code> (do projeto base)<br>• A pasta <code>images/</code> com as fotos do cliente</p></div>
+        </div>
+        <div class="step">
+          <div class="step-n">6</div>
+          <div class="step-c"><h4>Hospede no Netlify (gratuito)</h4><p>Acesse <code>netlify.com</code>, faça login, arraste a pasta do cliente para o deploy. Domínio gratuito <code>*.netlify.app</code> imediatamente. Para domínio próprio, configure o DNS.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ==================== DADOS PADRÃO ====================
+const DEFAULTS = {
+  PRIMEIRO_NOME:'Sthefany', SOBRENOME:'Ramos', NOME_COMPLETO:'Sthefany Ramos',
+  SUBTITULO:'Uma Voz Dessa Geração', HERO_PRE:'Cantora & Ministra',
+  NAV_SOBRE:'Quem sou eu?', NAV_CTA:'Solicitar Orçamento',
+  COR_P:'#C9956C', COR_P_CLARA:'#E8C5A8', COR_P_ESCURA:'#A67A52',
+  COR_FUNDO:'#FAF8F4', COR_FUNDO2:'#F3EDE5', COR_TEXTO:'#2C2416', COR_TEXTO_MED:'#5C5044',
+  COR_P_GLOW:'rgba(201,149,108,.42)', SHADOW_COLOR:'rgba(44,36,22,.08)',
+  SHADOW_COLOR_M:'rgba(44,36,22,.12)', SHADOW_COLOR_L:'rgba(44,36,22,.15)',
+  FONT_DISPLAY:"'Playfair Display', serif", FONT_ACCENT:"'Great Vibes', cursive", FONT_BODY:"'Raleway', sans-serif",
+  GFONTS_URL:'https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap',
+  HERO_TAGLINE:'Transformando momentos em memórias através da voz',
+  H_B1T:'Cerimônias', H_B1H:'#servico1', H_B2T:'Ministério', H_B2H:'#servico2', H_B3T:'Assista', H_B3H:'#multimidia',
+  HERO_IMG1:'images/casamento1.jpg', HERO_IMG2:'images/ministerio.jpg', HERO_IMG3:'images/evento2.jpg',
+  MQ1I:'fa-music', MQ1T:'Repertório Personalizado', MQ2I:'fa-comments', MQ2T:'Depoimentos de Noivas Reais',
+  MQ3I:'fa-church', MQ3T:'Ministrações Cheias do Espírito Santo', MQ4I:'fa-star', MQ4T:'Formação Técnica Vocal',
+  MQ5I:'fa-map-marker-alt', MQ5T:'Atende Todo o Brasil',
+  SOBRE_TAG:'Quem sou eu?', SOBRE_H:'Uma voz que', SOBRE_H_EM:'toca a alma',
+  SOBRE_FOTO:'images/foto-sobre.jpg', SOBRE_FOTO_ALT:'Sthefany Ramos — Cantora',
+  SOBRE_P1:'A música sempre foi mais do que uma profissão para mim; ela é o canal pelo qual expresso minha fé e a sensibilidade que dedico a cada história que ajudo a contar.',
+  SOBRE_P2:'Por trás da voz que ecoa nos altares, existe uma mulher que encontra sua maior força e inspiração no lar. Sou casada com Othávio, meu parceiro de vida e maior incentivador.',
+  SOBRE_P3:'No ministério, minha entrega é guiada pela reverência. Servir a Deus através do louvor é o que me sustenta nas ministrações e igrejas.',
+  S1N:'5+', S1L:'Anos de ministério', S2N:'1M+', S2L:'Views no YouTube', S3N:'100%', S3L:'Sempre ao vivo',
+  SVC1_TAG:'Para Noivas', SVC1_H:'Cerimônias de Casamento',
+  SVC1_DESC:'O dia mais especial merece uma trilha sonora que eternize cada emoção. Com um repertório que vai do clássico ao contemporâneo, sua cerimônia se tornará inesquecível.',
+  SVC1_F1:'Repertório personalizado para cada momento', SVC1_F2:'Duo (voz & violão) ou com banda',
+  SVC1_F3:'Entrada dos padrinhos, noiva, momento especial e saída', SVC1_F4:'Reunião prévia para escolha das músicas',
+  SVC1_F5:'Rede de músicos parceiros', SVC1_BTEXT:'Solicitar Orçamento', SVC1_BHREF:'#contato',
+  SVC1_VIDEO:'images/loop-casamentos.mp4',
+  SVC2_TAG:'Para Igrejas & Ministérios', SVC2_H:'Ministrações & Adoração',
+  SVC2_DESC:'Com sensibilidade ao Espírito Santo e um coração de adoradora, ministro a congregação através da música, criando um ambiente de encontro genuíno com Deus.',
+  SVC2_F1:'Ministração conduzida pelo Espírito Santo', SVC2_F2:'Repertório de adoração contemporâneo e clássico',
+  SVC2_F3:'Cultos especiais, retiros e conferências', SVC2_F4:'Música autoral que edifica a fé',
+  SVC2_F5:'Prontidão para servir à congregação', SVC2_BTEXT:'Entrar em Contato', SVC2_BHREF:'#contato',
+  SVC2_YT_ID:'KABJcP7TnC0', SVC2_YT_TITULO:'Sthefany Ramos — Ministração e Adoração',
+  SVC2_YT_CAPTION:'A música que o Senhor colocou no meu coração',
+  SVC2_FOTO:'images/ministerio.jpg', SVC2_FOTO_ALT:'Sthefany Ramos — Adoração',
+  SVC3_TAG:'Eventos Corporativos & Sociais', SVC3_H:'Elegância em cada ocasião',
+  SVC3_DESC:'Elegância e versatilidade para jantares, recepções, comemorações e eventos corporativos, com um repertório diversificado garantindo a atmosfera perfeita.',
+  SVC3_F1:'Jantares e recepções de alto padrão', SVC3_F2:'Formaturas e celebrações especiais',
+  SVC3_F3:'Eventos corporativos e institucionais', SVC3_F4:'Repertório clássico, MPB e pop cristão',
+  SVC3_F5:'Atende em todo o Brasil', SVC3_BTEXT:'Solicitar Orçamento', SVC3_BHREF:'#contato',
+  SVC3_IMG1:'images/evento1.jpg', SVC3_IMG1_ALT:'Evento social', SVC3_IMG2:'images/evento2.jpg', SVC3_IMG2_ALT:'Evento corporativo',
+  YT1_ID:'_KVrOmwN_Tg', YT1_TITULO:'Sthefany Ramos — Ao Vivo',
+  YT2_ID:'KABJcP7TnC0', YT2_TITULO:'Sthefany Ramos — Ministração e Adoração',
+  YT_CANAL_URL:'https://youtube.com/@sthefanyramosoficial', YT_CANAL_HANDLE:'@sthefanyramosoficial',
+  GAL_IMG1:'images/foto-sobre.jpg', GAL_ALT1:'Sthefany Ramos',
+  GAL_IMG2:'images/evento1.jpg', GAL_ALT2:'Evento social',
+  GAL_IMG3:'images/casamento1.jpg', GAL_ALT3:'Casamento',
+  GAL_IMG4:'images/loop-casamentos.mp4', GAL_ALT4:'Casamentos',
+  GAL_IMG5:'images/ministerio.jpg', GAL_ALT5:'Ministração',
+  GAL_IMG6:'images/loop-ministerio.mp4', GAL_ALT6:'Ministério',
+  GAL_IMG7:'images/evento2.jpg', GAL_ALT7:'Evento',
+  TEST_TAG:'Depoimentos', TEST_H:'O que dizem sobre', TEST_H_EM:'minha voz',
+  T1_BADGE_CLASS:'badge-noiva', T1_BADGE_ICON:'fa-heart', T1_BADGE_LABEL:'Noiva',
+  T1_TEXTO:'[Depoimento será adicionado em breve]', T1_NOME:'Nome da Noiva', T1_CARGO:'Cerimônia — Local, Cidade',
+  T2_BADGE_CLASS:'badge-noiva', T2_BADGE_ICON:'fa-heart', T2_BADGE_LABEL:'Noiva',
+  T2_TEXTO:'[Depoimento será adicionado em breve]', T2_NOME:'Nome da Noiva', T2_CARGO:'Cerimônia — Local, Cidade',
+  T3_BADGE_CLASS:'badge-pastor', T3_BADGE_ICON:'fa-church', T3_BADGE_LABEL:'Pastor',
+  T3_TEXTO:'[Testemunho será adicionado em breve]', T3_NOME:'Nome do Pastor', T3_CARGO:'Igreja — Cidade',
+  T4_BADGE_CLASS:'badge-pastor', T4_BADGE_ICON:'fa-church', T4_BADGE_LABEL:'Pastor',
+  T4_TEXTO:'[Testemunho será adicionado em breve]', T4_NOME:'Nome do Pastor', T4_CARGO:'Igreja — Cidade',
+  FAQ_TAG:'Dúvidas Frequentes', FAQ_H:'Tudo que você precisa', FAQ_H_EM:'saber',
+  FAQ1_P:'Você atende em qual região do Brasil?', FAQ1_R:'Tenho base em Santa Catarina e atendo em todo o Brasil. Para eventos fora do estado, os custos de deslocamento e hospedagem são acordados separadamente.',
+  FAQ2_P:'Como funciona a contratação?', FAQ2_R:'Entre em contato pelo WhatsApp ou formulário. Após alinhamento, enviamos proposta e contrato para formalizar.',
+  FAQ3_P:'Qual o prazo ideal para contratar?', FAQ3_R:'O ideal é com pelo menos 3 meses de antecedência para garantir disponibilidade em agenda.',
+  FAQ4_P:'Você leva equipamento de som?', FAQ4_R:'Para eventos menores, possuo equipamento próprio. Para eventos maiores, recomendo contratar um técnico de som profissional.',
+  FAQ5_P:'Como funciona a escolha do serviço/produto?', FAQ5_R:'Após o contato inicial, realizamos uma reunião para entender suas necessidades e apresentamos as melhores opções.',
+  FAQ6_P:'Posso solicitar algo fora do portfólio?', FAQ6_R:'Sim! Cada solicitação é avaliada individualmente. Entre em contato para conversarmos.',
+  C_TAG:'Contato', C_H:'Vamos criar', C_H_EM:'memórias juntos?',
+  C_DESC:'Preencha o formulário e receba um orçamento personalizado em até 24 horas.',
+  WA_NUM:'5500000000000', C_EMAIL:'contato@email.com',
+  IG_URL:'https://instagram.com/handle', IG_HANDLE:'@handle',
+  FORMSPREE_ID:'xxxxxxxx', C_FORM_BTN:'Solicitar Orçamento',
+  WA_MSG:'Olá! Vim pelo site e gostaria de saber mais sobre os serviços.',
+  WA_MSG_ENCODED:'Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais.',
+  WA_TIP:'Fale comigo!',
+  F_BIO:'Transformando momentos em memórias eternas através da música.',
+  F_IG_URL:'https://instagram.com/handle', F_YT_URL:'https://youtube.com/@handle',
+  F_FB_URL:'https://facebook.com/pagina', F_SP_URL:'https://open.spotify.com',
+  F_SVC1:'Cerimônias de Casamento', F_SVC2:'Ministrações em Igrejas',
+  F_SVC3:'Eventos Corporativos', F_SVC4:'Jantares & Recepções',
+  F_SVC5:'Formaturas', F_SVC6:'Retiros & Conferências',
+  F_HORARIO:'Atendimento:\nSeg a Sex, 9h–18h\nSáb, 9h–13h',
+  F_ANO:'2025', F_CREDITO:'Desenvolvido com dedicação',
+  TITULO_PAGINA:'Sthefany Ramos | Uma Voz Dessa Geração',
+  META_DESC:'Sthefany Ramos — Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais em Florianópolis e todo o Brasil.',
+  META_KEYWORDS:'cantora casamento Florianópolis, cantora gospel Santa Catarina, cantora cerimônia SC',
+  OG_TITULO:'Sthefany Ramos | Uma Voz Dessa Geração',
+  OG_DESC:'Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais',
+  SITE_URL:'https://sthefanyramos.com.br', OG_IMAGE:'https://sthefanyramos.com.br/images/og-cover.jpg',
+  SCHEMA_JSON:'{\n  "@context": "https://schema.org",\n  "@type": "MusicGroup",\n  "name": "Sthefany Ramos",\n  "url": "https://sthefanyramos.com.br",\n  "description": "Cantora para cerimônias de casamento, ministrações em igrejas e eventos sociais",\n  "areaServed": "Brasil"\n}'
+};
+
+// ==================== PALETAS ====================
+const PALETTES = {
+  rosegold:{COR_P:'#C9956C',COR_P_CLARA:'#E8C5A8',COR_P_ESCURA:'#A67A52',COR_FUNDO:'#FAF8F4',COR_FUNDO2:'#F3EDE5',COR_TEXTO:'#2C2416',COR_TEXTO_MED:'#5C5044',COR_P_GLOW:'rgba(201,149,108,.42)',SHADOW_COLOR:'rgba(44,36,22,.08)',SHADOW_COLOR_M:'rgba(44,36,22,.12)',SHADOW_COLOR_L:'rgba(44,36,22,.15)'},
+  navy:{COR_P:'#2E5077',COR_P_CLARA:'#6B9BBF',COR_P_ESCURA:'#1A3050',COR_FUNDO:'#F4F7FB',COR_FUNDO2:'#E8EEF5',COR_TEXTO:'#0D1B2A',COR_TEXTO_MED:'#2C4057',COR_P_GLOW:'rgba(46,80,119,.42)',SHADOW_COLOR:'rgba(13,27,42,.08)',SHADOW_COLOR_M:'rgba(13,27,42,.12)',SHADOW_COLOR_L:'rgba(13,27,42,.15)'},
+  emerald:{COR_P:'#2D7D6E',COR_P_CLARA:'#7FBFB5',COR_P_ESCURA:'#1A5248',COR_FUNDO:'#F2FAF8',COR_FUNDO2:'#E4F3F0',COR_TEXTO:'#0F2E28',COR_TEXTO_MED:'#2A5248',COR_P_GLOW:'rgba(45,125,110,.42)',SHADOW_COLOR:'rgba(15,46,40,.08)',SHADOW_COLOR_M:'rgba(15,46,40,.12)',SHADOW_COLOR_L:'rgba(15,46,40,.15)'},
+  royal:{COR_P:'#6B3D8C',COR_P_CLARA:'#B08BC0',COR_P_ESCURA:'#4A2A62',COR_FUNDO:'#F8F4FC',COR_FUNDO2:'#EFE6F5',COR_TEXTO:'#2A1040',COR_TEXTO_MED:'#4A2A62',COR_P_GLOW:'rgba(107,61,140,.42)',SHADOW_COLOR:'rgba(42,16,64,.08)',SHADOW_COLOR_M:'rgba(42,16,64,.12)',SHADOW_COLOR_L:'rgba(42,16,64,.15)'},
+  burgundy:{COR_P:'#8B2635',COR_P_CLARA:'#C0707C',COR_P_ESCURA:'#5C1520',COR_FUNDO:'#FBF6F7',COR_FUNDO2:'#F4EAEC',COR_TEXTO:'#2C0A10',COR_TEXTO_MED:'#5C2028',COR_P_GLOW:'rgba(139,38,53,.42)',SHADOW_COLOR:'rgba(44,10,16,.08)',SHADOW_COLOR_M:'rgba(44,10,16,.12)',SHADOW_COLOR_L:'rgba(44,10,16,.15)'},
+  gold:{COR_P:'#B8962E',COR_P_CLARA:'#D4B86A',COR_P_ESCURA:'#8A6E22',COR_FUNDO:'#FBF9F2',COR_FUNDO2:'#F4EFE0',COR_TEXTO:'#2C2008',COR_TEXTO_MED:'#5C4820',COR_P_GLOW:'rgba(184,150,46,.42)',SHADOW_COLOR:'rgba(44,32,8,.08)',SHADOW_COLOR_M:'rgba(44,32,8,.12)',SHADOW_COLOR_L:'rgba(44,32,8,.15)'},
+  slate:{COR_P:'#4A6FA5',COR_P_CLARA:'#8AABD0',COR_P_ESCURA:'#2E4E7E',COR_FUNDO:'#F4F5F8',COR_FUNDO2:'#E8EBF2',COR_TEXTO:'#1A2030',COR_TEXTO_MED:'#3A4560',COR_P_GLOW:'rgba(74,111,165,.42)',SHADOW_COLOR:'rgba(26,32,48,.08)',SHADOW_COLOR_M:'rgba(26,32,48,.12)',SHADOW_COLOR_L:'rgba(26,32,48,.15)'},
+  mono:{COR_P:'#333333',COR_P_CLARA:'#777777',COR_P_ESCURA:'#111111',COR_FUNDO:'#F8F8F8',COR_FUNDO2:'#EFEFEF',COR_TEXTO:'#111111',COR_TEXTO_MED:'#444444',COR_P_GLOW:'rgba(51,51,51,.42)',SHADOW_COLOR:'rgba(17,17,17,.08)',SHADOW_COLOR_M:'rgba(17,17,17,.12)',SHADOW_COLOR_L:'rgba(17,17,17,.15)'}
+};
+
+// ==================== FONTES ====================
+const FONTS = {
+  display:{
+    playfair:{val:"'Playfair Display', serif",gf:'family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400'},
+    cormorant:{val:"'Cormorant Garamond', serif",gf:'family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400'},
+    lora:{val:"'Lora', serif",gf:'family=Lora:ital,wght@0,400;0,600;1,400'},
+    garamond:{val:"'EB Garamond', serif",gf:'family=EB+Garamond:ital,wght@0,400;0,500;1,400'},
+    baskerville:{val:"'Libre Baskerville', serif",gf:'family=Libre+Baskerville:ital,wght@0,400;0,700;1,400'}
+  },
+  accent:{
+    greatvibes:{val:"'Great Vibes', cursive",gf:'family=Great+Vibes'},
+    dancing:{val:"'Dancing Script', cursive",gf:'family=Dancing+Script:wght@400;700'},
+    sacramento:{val:"'Sacramento', cursive",gf:'family=Sacramento'},
+    allura:{val:"'Allura', cursive",gf:'family=Allura'},
+    pacifico:{val:"'Pacifico', cursive",gf:'family=Pacifico'}
+  },
+  body:{
+    raleway:{val:"'Raleway', sans-serif",gf:'family=Raleway:wght@300;400;500;600;700'},
+    poppins:{val:"'Poppins', sans-serif",gf:'family=Poppins:wght@300;400;500;600;700'},
+    nunito:{val:"'Nunito', sans-serif",gf:'family=Nunito:wght@300;400;500;600;700'},
+    inter:{val:"'Inter', sans-serif",gf:'family=Inter:wght@300;400;500;600;700'},
+    montserrat:{val:"'Montserrat', sans-serif",gf:'family=Montserrat:wght@300;400;500;600;700'}
+  }
+};
+
+// ==================== TESTIMONIAL CARDS ====================
+function buildTestCards(){
+  const wrap=document.getElementById('test-cards');
+  wrap.innerHTML='';
+  for(let i=1;i<=4;i++){
+    const d=DEFAULTS;
+    wrap.innerHTML+=`<div class="fcard inner-card">
+      <div class="inner-card-t">Depoimento ${i}</div>
+      <div class="badge-row" id="badge-row-${i}">
+        <button class="badge-opt ${d['T'+i+'_BADGE_CLASS']==='badge-noiva'?'sel':''}" onclick="setBadge(${i},'badge-noiva','fa-heart','Noiva')" data-class="badge-noiva" data-icon="fa-heart" data-label="Noiva">Noiva</button>
+        <button class="badge-opt ${d['T'+i+'_BADGE_CLASS']==='badge-pastor'?'sel':''}" onclick="setBadge(${i},'badge-pastor','fa-church','Pastor')" data-class="badge-pastor" data-icon="fa-church" data-label="Pastor">Pastor</button>
+        <button class="badge-opt" onclick="setBadge(${i},'badge-noiva','fa-star','Cliente')" data-class="badge-noiva" data-icon="fa-star" data-label="Cliente">Cliente</button>
+        <button class="badge-opt" onclick="setBadge(${i},'badge-noiva','fa-user','Parceiro')" data-class="badge-noiva" data-icon="fa-user" data-label="Parceiro">Parceiro</button>
+      </div>
+      <input type="hidden" id="T${i}_BADGE_CLASS" value="${d['T'+i+'_BADGE_CLASS']}">
+      <input type="hidden" id="T${i}_BADGE_ICON" value="${d['T'+i+'_BADGE_ICON']}">
+      <input type="hidden" id="T${i}_BADGE_LABEL" value="${d['T'+i+'_BADGE_LABEL']}">
+      <div class="grid2">
+        <div class="fg span2"><label>Texto</label><textarea id="T${i}_TEXTO" rows="2">${d['T'+i+'_TEXTO']}</textarea></div>
+        <div class="fg"><label>Nome</label><input type="text" id="T${i}_NOME" value="${d['T'+i+'_NOME']}"></div>
+        <div class="fg"><label>Cargo / Contexto</label><input type="text" id="T${i}_CARGO" value="${d['T'+i+'_CARGO']}"></div>
+      </div>
+    </div>`;
+  }
+}
+
+function setBadge(i,cls,icon,label){
+  document.getElementById('T'+i+'_BADGE_CLASS').value=cls;
+  document.getElementById('T'+i+'_BADGE_ICON').value=icon;
+  document.getElementById('T'+i+'_BADGE_LABEL').value=label;
+  document.querySelectorAll('#badge-row-'+i+' .badge-opt').forEach(b=>b.classList.remove('sel'));
+  event.target.classList.add('sel');
+}
+
+function buildFaqItems(){
+  const wrap=document.getElementById('faq-items');
+  wrap.innerHTML='';
+  for(let i=1;i<=6;i++){
+    wrap.innerHTML+=`<div class="fcard inner-card">
+      <div class="inner-card-t">Pergunta ${i}</div>
+      <div class="fg"><label>Pergunta</label><input type="text" id="FAQ${i}_P" value="${DEFAULTS['FAQ'+i+'_P']}"></div>
+      <div class="fg"><label>Resposta</label><textarea id="FAQ${i}_R" rows="2">${DEFAULTS['FAQ'+i+'_R']||''}</textarea></div>
+    </div>`;
+  }
+}
+
+// ==================== FONTES UPDATE ====================
+function updateFont(type){
+  const sel=document.getElementById('FONT_'+type.toUpperCase()+'_sel').value;
+  const data=FONTS[type][sel];
+  const prevId='prev-'+type;
+  const prevEl=document.getElementById(prevId);
+  if(prevEl){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='https://fonts.googleapis.com/css2?'+data.gf+'&display=swap';
+    document.head.appendChild(link);
+    prevEl.style.fontFamily=data.val;
+  }
+  buildGFontsUrl();
+}
+
+function buildGFontsUrl(){
+  const d=FONTS.display[document.getElementById('FONT_DISPLAY_sel').value];
+  const a=FONTS.accent[document.getElementById('FONT_ACCENT_sel').value];
+  const b=FONTS.body[document.getElementById('FONT_BODY_sel').value];
+  return 'https://fonts.googleapis.com/css2?'+d.gf+'&'+a.gf+'&'+b.gf+'&display=swap';
+}
+
+function getSelectedFontValues(){
+  return {
+    FONT_DISPLAY: FONTS.display[document.getElementById('FONT_DISPLAY_sel').value].val,
+    FONT_ACCENT:  FONTS.accent[document.getElementById('FONT_ACCENT_sel').value].val,
+    FONT_BODY:    FONTS.body[document.getElementById('FONT_BODY_sel').value].val,
+    GFONTS_URL:   buildGFontsUrl()
+  };
+}
+
+// ==================== CORES ====================
+function syncColor(id){
+  const picker=document.getElementById(id+'_picker');
+  const text=document.getElementById(id);
+  if(picker&&text) text.value=picker.value;
+}
+function syncColorPicker(id){
+  const text=document.getElementById(id);
+  const picker=document.getElementById(id+'_picker');
+  if(text&&picker&&/^#[0-9A-Fa-f]{6}$/.test(text.value)) picker.value=text.value;
+}
+
+function applyPalette(name){
+  const p=PALETTES[name];
+  if(!p) return;
+  Object.keys(p).forEach(k=>{
+    const el=document.getElementById(k);
+    if(el) el.value=p[k];
+    const picker=document.getElementById(k+'_picker');
+    if(picker&&/^#[0-9A-Fa-f]{6}$/.test(p[k])) picker.value=p[k];
+  });
+}
+
+// ==================== SCHEMA PRESETS ====================
+function setSchema(type){
+  const schemas={
+    music:'{\n  "@context": "https://schema.org",\n  "@type": "MusicGroup",\n  "name": "{{NOME_COMPLETO}}",\n  "url": "{{SITE_URL}}",\n  "description": "{{META_DESC}}",\n  "areaServed": "Brasil"\n}',
+    local:'{\n  "@context": "https://schema.org",\n  "@type": "LocalBusiness",\n  "name": "{{NOME_COMPLETO}}",\n  "url": "{{SITE_URL}}",\n  "description": "{{META_DESC}}",\n  "address": {"@type": "PostalAddress","addressLocality": "Cidade","addressRegion": "Estado","addressCountry": "BR"}\n}',
+    person:'{\n  "@context": "https://schema.org",\n  "@type": "Person",\n  "name": "{{NOME_COMPLETO}}",\n  "url": "{{SITE_URL}}",\n  "description": "{{META_DESC}}",\n  "jobTitle": "{{HERO_PRE}}"\n}',
+    health:'{\n  "@context": "https://schema.org",\n  "@type": "HealthAndBeautyBusiness",\n  "name": "{{NOME_COMPLETO}}",\n  "url": "{{SITE_URL}}",\n  "description": "{{META_DESC}}"\n}',
+    photo:'{\n  "@context": "https://schema.org",\n  "@type": "LocalBusiness",\n  "name": "{{NOME_COMPLETO}}",\n  "url": "{{SITE_URL}}",\n  "description": "{{META_DESC}}",\n  "@type": "Photographer"\n}'
+  };
+  const el=document.getElementById('SCHEMA_JSON');
+  if(el) el.value=schemas[type]||'';
+}
+
+// ==================== GET CONFIG ====================
+function getConfig(){
+  const cfg={};
+  // all regular inputs/textareas
+  document.querySelectorAll('[id]').forEach(el=>{
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.tagName==='SELECT'){
+      if(el.id && !el.id.includes('_picker') && !el.id.includes('_sel') && !el.id.startsWith('import')){
+        cfg[el.id]=el.value;
+      }
+    }
+  });
+  // font selects
+  Object.assign(cfg, getSelectedFontValues());
+  // WA encoded message
+  cfg.WA_MSG_ENCODED=encodeURIComponent(cfg.WA_MSG||'');
+  return cfg;
+}
+
+// ==================== TEMPLATE ====================
+function getTemplate(){
+  return fetch('../template/site-template.html').then(r=>r.text()).catch(()=>{
+    // fallback: inline minimal template reference notice
+    return null;
+  });
+}
+
+async function generate(){
+  let tpl;
+  try{ tpl=await fetch('site-template.html').then(r=>{if(!r.ok)throw new Error();return r.text();}); }
+  catch(e){
+    alert('Não foi possível carregar site-template.html.\nCertifique-se de que ambos os arquivos estão na mesma pasta template/ e abra o dashboard via um servidor local (ex: Live Server no VS Code).');
+    return null;
+  }
+  const cfg=getConfig();
+  Object.keys(cfg).forEach(k=>{
+    const re=new RegExp('\\{\\{'+k+'\\}\\}','g');
+    tpl=tpl.replace(re, cfg[k]||'');
+  });
+  // limpa placeholders não preenchidos
+  tpl=tpl.replace(/\{\{[A-Z0-9_]+\}\}/g,'');
+  return tpl;
+}
+
+async function previewSite(){
+  const html=await generate();
+  if(!html) return;
+  const blob=new Blob([html],{type:'text/html'});
+  window.open(URL.createObjectURL(blob),'_blank');
+}
+
+async function downloadSite(){
+  const html=await generate();
+  if(!html) return;
+  const nome=document.getElementById('NOME_COMPLETO')?.value||'cliente';
+  const slug=nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='index.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+}
+
+// ==================== IMPORT / EXPORT ====================
+function exportConfig(){
+  const cfg=getConfig();
+  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});
+  const nome=cfg.NOME_COMPLETO||'cliente';
+  const slug=nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='config-'+slug+'.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+}
+
+function importConfig(event){
+  const file=event.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const cfg=JSON.parse(e.target.result);
+      Object.keys(cfg).forEach(k=>{
+        const el=document.getElementById(k);
+        if(el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA')) el.value=cfg[k];
+        const picker=document.getElementById(k+'_picker');
+        if(picker&&/^#[0-9A-Fa-f]{6}$/.test(cfg[k])) picker.value=cfg[k];
+      });
+      alert('Configuração importada com sucesso!');
+    }catch(err){alert('Erro ao ler o JSON: '+err.message);}
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+// ==================== SIDEBAR NAV ====================
+document.querySelectorAll('.sb-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    item.classList.add('active');
+    const pid='panel-'+item.dataset.panel;
+    const panel=document.getElementById(pid);
+    if(panel){ panel.classList.add('active'); document.getElementById('content').scrollTop=0; }
+  });
+});
+
+// ==================== INIT ====================
+function init(){
+  // populate all simple fields with defaults
+  Object.keys(DEFAULTS).forEach(k=>{
+    const el=document.getElementById(k);
+    if(el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA')&&!el.value){
+      el.value=DEFAULTS[k];
+    }
+    const picker=document.getElementById(k+'_picker');
+    if(picker&&/^#[0-9A-Fa-f]{6}$/.test(DEFAULTS[k])) picker.value=DEFAULTS[k];
+  });
+  buildTestCards();
+  buildFaqItems();
+  updateFont('display');
+  updateFont('accent');
+  updateFont('body');
+}
+
+init();
+</script>
+</body>
+</html>

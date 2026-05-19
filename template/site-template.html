@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{META_DESC}}">
+  <meta name="keywords" content="{{META_KEYWORDS}}">
+  <meta name="theme-color" content="{{COR_P}}">
+  <meta property="og:title" content="{{OG_TITULO}}">
+  <meta property="og:description" content="{{OG_DESC}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{SITE_URL}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <link rel="canonical" href="{{SITE_URL}}">
+  <title>{{TITULO_PAGINA}}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{GFONTS_URL}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+:root {
+  --rg:         {{COR_P}};
+  --rg-light:   {{COR_P_CLARA}};
+  --rg-dark:    {{COR_P_ESCURA}};
+  --ivory:      {{COR_FUNDO}};
+  --ivory-dark: {{COR_FUNDO2}};
+  --dark:       {{COR_TEXTO}};
+  --mid:        {{COR_TEXTO_MED}};
+  --f-display:  {{FONT_DISPLAY}};
+  --f-accent:   {{FONT_ACCENT}};
+  --f-body:     {{FONT_BODY}};
+  --rg-glow:    {{COR_P_GLOW}};
+  --sh:   0 4px 20px {{SHADOW_COLOR}};
+  --sh-m: 0 8px 30px {{SHADOW_COLOR_M}};
+  --sh-l: 0 16px 50px {{SHADOW_COLOR_L}};
+}
+  </style>
+
+  <script type="application/ld+json">
+  {{SCHEMA_JSON}}
+  </script>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-name">{{NOME_COMPLETO}}</span>
+        <span class="logo-subtitle">{{SUBTITULO}}</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#inicio" class="nav-link">Início</a></li>
+        <li><a href="#sobre" class="nav-link">{{NAV_SOBRE}}</a></li>
+        <li class="nav-dropdown">
+          <a href="#servicos" class="nav-link">Serviços <i class="fas fa-chevron-down fa-xs"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#servico1">{{SVC1_H}}</a></li>
+            <li><a href="#servico2">{{SVC2_H}}</a></li>
+            <li><a href="#servico3">{{SVC3_H}}</a></li>
+          </ul>
+        </li>
+        <li><a href="#multimidia" class="nav-link">Multimídia</a></li>
+        <li><a href="#contato" class="nav-link nav-cta">{{NAV_CTA}}</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="inicio">
+    <div class="hero-slideshow" aria-hidden="true">
+      <div class="hs-slide hs-1" style="background-image:url('{{HERO_IMG1}}')"></div>
+      <div class="hs-slide hs-2" style="background-image:url('{{HERO_IMG2}}'); background-position:center 20%;"></div>
+      <div class="hs-slide hs-3" style="background-image:url('{{HERO_IMG3}}')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-pre"><span>{{HERO_PRE}}</span></p>
+      <h1 class="hero-name">{{PRIMEIRO_NOME}}<span class="hero-sobrenome">{{SOBRENOME}}</span></h1>
+      <p class="hero-tagline">{{HERO_TAGLINE}}</p>
+      <div class="hero-btns">
+        <a href="{{H_B1H}}" class="btn btn-primary">{{H_B1T}}</a>
+        <a href="{{H_B2H}}" class="btn btn-outline">{{H_B2T}}</a>
+        <a href="{{H_B3H}}" class="btn btn-outline">{{H_B3T}}</a>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Descubra</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VALUE BAR ========== -->
+  <div class="value-bar">
+    <div class="marquee-track" aria-hidden="true">
+      <div class="marquee-inner">
+        <span class="mq-item"><i class="fas {{MQ1I}}"></i>{{MQ1T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ2I}}"></i>{{MQ2T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ3I}}"></i>{{MQ3T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ4I}}"></i>{{MQ4T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ5I}}"></i>{{MQ5T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ1I}}"></i>{{MQ1T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ2I}}"></i>{{MQ2T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ3I}}"></i>{{MQ3T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ4I}}"></i>{{MQ4T}}</span>
+        <span class="mq-dot">◆</span>
+        <span class="mq-item"><i class="fas {{MQ5I}}"></i>{{MQ5T}}</span>
+        <span class="mq-dot">◆</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img reveal-left">
+          <div class="img-frame">
+            <img src="{{SOBRE_FOTO}}" alt="{{SOBRE_FOTO_ALT}}"
+              onerror="this.parentElement.classList.add('img-placeholder')">
+            <div class="img-placeholder-label">Adicione sua foto aqui<br><small>{{SOBRE_FOTO}}</small></div>
+          </div>
+          <div class="img-accent"></div>
+        </div>
+        <div class="about-content reveal-right">
+          <p class="tag">{{SOBRE_TAG}}</p>
+          <h2 class="section-title">{{SOBRE_H}} <em>{{SOBRE_H_EM}}</em></h2>
+          <p class="body-text">{{SOBRE_P1}}</p>
+          <p class="body-text">{{SOBRE_P2}}</p>
+          <p class="body-text">{{SOBRE_P3}}</p>
+          <div class="about-sig">
+            <img src="images/assinatura.png" alt="Assinatura" class="sig-img"
+              onerror="this.style.display='none'; document.getElementById('sig-text').style.display='block'">
+            <span id="sig-text" class="sig-text" style="display:none">{{NOME_COMPLETO}}</span>
+          </div>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num">{{S1N}}</span><span class="stat-lbl">{{S1L}}</span></div>
+            <div class="stat"><span class="stat-num">{{S2N}}</span><span class="stat-lbl">{{S2L}}</span></div>
+            <div class="stat"><span class="stat-num">{{S3N}}</span><span class="stat-lbl">{{S3L}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="servicos" class="services-anchor"></section>
+
+  <!-- SERVIÇO 1 -->
+  <div class="service-block svc-wedding" id="servico1">
+    <div class="container">
+      <div class="svc-grid reveal">
+        <div class="svc-content">
+          <p class="tag">{{SVC1_TAG}}</p>
+          <h2 class="svc-title">{{SVC1_H}}</h2>
+          <p class="body-text">{{SVC1_DESC}}</p>
+          <ul class="svc-features">
+            <li><i class="fas fa-check"></i>{{SVC1_F1}}</li>
+            <li><i class="fas fa-check"></i>{{SVC1_F2}}</li>
+            <li><i class="fas fa-check"></i>{{SVC1_F3}}</li>
+            <li><i class="fas fa-check"></i>{{SVC1_F4}}</li>
+            <li><i class="fas fa-check"></i>{{SVC1_F5}}</li>
+          </ul>
+          <a href="{{SVC1_BHREF}}" class="btn btn-primary">{{SVC1_BTEXT}}</a>
+        </div>
+        <div class="svc-media">
+          <div class="svc-loop-wrap">
+            <video autoplay loop muted playsinline class="svc-loop">
+              <source src="{{SVC1_VIDEO}}" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIÇO 2 -->
+  <div class="service-block svc-church" id="servico2">
+    <div class="container">
+      <div class="svc-grid svc-grid-rev reveal">
+        <div class="svc-content">
+          <p class="tag church-tag">{{SVC2_TAG}}</p>
+          <h2 class="svc-title">{{SVC2_H}}</h2>
+          <p class="body-text">{{SVC2_DESC}}</p>
+          <ul class="svc-features church-feat">
+            <li><i class="fas fa-check"></i>{{SVC2_F1}}</li>
+            <li><i class="fas fa-check"></i>{{SVC2_F2}}</li>
+            <li><i class="fas fa-check"></i>{{SVC2_F3}}</li>
+            <li><i class="fas fa-check"></i>{{SVC2_F4}}</li>
+            <li><i class="fas fa-check"></i>{{SVC2_F5}}</li>
+          </ul>
+          <a href="{{SVC2_BHREF}}" class="btn btn-church">{{SVC2_BTEXT}}</a>
+        </div>
+        <div class="svc-media">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/{{SVC2_YT_ID}}"
+              title="{{SVC2_YT_TITULO}}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <p class="video-caption"><em>"{{SVC2_YT_CAPTION}}"</em></p>
+          <div class="church-photo-wrap">
+            <img src="{{SVC2_FOTO}}" alt="{{SVC2_FOTO_ALT}}" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIÇO 3 -->
+  <div class="service-block svc-events" id="servico3">
+    <div class="container">
+      <div class="svc-grid reveal">
+        <div class="svc-content">
+          <p class="tag">{{SVC3_TAG}}</p>
+          <h2 class="svc-title">{{SVC3_H}}</h2>
+          <p class="body-text">{{SVC3_DESC}}</p>
+          <ul class="svc-features">
+            <li><i class="fas fa-check"></i>{{SVC3_F1}}</li>
+            <li><i class="fas fa-check"></i>{{SVC3_F2}}</li>
+            <li><i class="fas fa-check"></i>{{SVC3_F3}}</li>
+            <li><i class="fas fa-check"></i>{{SVC3_F4}}</li>
+            <li><i class="fas fa-check"></i>{{SVC3_F5}}</li>
+          </ul>
+          <a href="{{SVC3_BHREF}}" class="btn btn-primary">{{SVC3_BTEXT}}</a>
+        </div>
+        <div class="svc-media">
+          <div class="svc-img-grid">
+            <img src="{{SVC3_IMG1}}" alt="{{SVC3_IMG1_ALT}}">
+            <img src="{{SVC3_IMG2}}" alt="{{SVC3_IMG2_ALT}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MULTIMÍDIA ========== -->
+  <section class="portfolio" id="multimidia">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">Multimídia</p>
+        <h2 class="section-title">Veja e ouça <em>ao vivo</em></h2>
+      </div>
+      <div class="media-yt-grid reveal">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/{{YT1_ID}}?rel=0" title="{{YT1_TITULO}}"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/{{YT2_ID}}?rel=0" title="{{YT2_TITULO}}"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="media-masonry reveal">
+        <div class="media-item tall"><img src="{{GAL_IMG1}}" alt="{{GAL_ALT1}}"></div>
+        <div class="media-item"><img src="{{GAL_IMG2}}" alt="{{GAL_ALT2}}"></div>
+        <div class="media-item"><img src="{{GAL_IMG3}}" alt="{{GAL_ALT3}}"></div>
+        <div class="media-item tall"><img src="{{GAL_IMG4}}" alt="{{GAL_ALT4}}"></div>
+        <div class="media-item"><img src="{{GAL_IMG5}}" alt="{{GAL_ALT5}}"></div>
+        <div class="media-item"><img src="{{GAL_IMG6}}" alt="{{GAL_ALT6}}"></div>
+        <div class="media-item"><img src="{{GAL_IMG7}}" alt="{{GAL_ALT7}}"></div>
+      </div>
+      <div class="media-yt-cta reveal">
+        <p class="media-yt-text">Assista a todos os vídeos no canal oficial</p>
+        <a href="{{YT_CANAL_URL}}" target="_blank" rel="noopener" class="btn btn-primary">
+          <i class="fab fa-youtube"></i> {{YT_CANAL_HANDLE}}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DEPOIMENTOS ========== -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">{{TEST_TAG}}</p>
+        <h2 class="section-title">{{TEST_H}} <em>{{TEST_H_EM}}</em></h2>
+      </div>
+      <div class="slider-wrap reveal">
+        <div class="slider-track" id="slider-track">
+          <div class="tcard">
+            <div class="tcard-badge {{T1_BADGE_CLASS}}"><i class="fas {{T1_BADGE_ICON}}"></i> {{T1_BADGE_LABEL}}</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"{{T1_TEXTO}}"</p>
+            <div class="tauthor">
+              <span class="tname">— {{T1_NOME}}</span>
+              <span class="ttitle">{{T1_CARGO}}</span>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="tcard-badge {{T2_BADGE_CLASS}}"><i class="fas {{T2_BADGE_ICON}}"></i> {{T2_BADGE_LABEL}}</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"{{T2_TEXTO}}"</p>
+            <div class="tauthor">
+              <span class="tname">— {{T2_NOME}}</span>
+              <span class="ttitle">{{T2_CARGO}}</span>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="tcard-badge {{T3_BADGE_CLASS}}"><i class="fas {{T3_BADGE_ICON}}"></i> {{T3_BADGE_LABEL}}</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"{{T3_TEXTO}}"</p>
+            <div class="tauthor">
+              <span class="tname">— {{T3_NOME}}</span>
+              <span class="ttitle">{{T3_CARGO}}</span>
+            </div>
+          </div>
+          <div class="tcard">
+            <div class="tcard-badge {{T4_BADGE_CLASS}}"><i class="fas {{T4_BADGE_ICON}}"></i> {{T4_BADGE_LABEL}}</div>
+            <div class="stars">★★★★★</div>
+            <p class="ttext">"{{T4_TEXTO}}"</p>
+            <div class="tauthor">
+              <span class="tname">— {{T4_NOME}}</span>
+              <span class="ttitle">{{T4_CARGO}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="sl-btn" id="prev-btn" aria-label="Depoimento anterior"><i class="fas fa-chevron-left"></i></button>
+          <div class="sl-dots" id="sl-dots"></div>
+          <button class="sl-btn" id="next-btn" aria-label="Próximo depoimento"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="tag">{{FAQ_TAG}}</p>
+        <h2 class="section-title">{{FAQ_H}} <em>{{FAQ_H_EM}}</em></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ1_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ1_R}}</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ2_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ2_R}}</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ3_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ3_R}}</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ4_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ4_R}}</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ5_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ5_R}}</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>{{FAQ6_P}}</span><i class="fas fa-plus faq-icon"></i></button>
+          <div class="faq-a"><p>{{FAQ6_R}}</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTATO ========== -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <p class="tag">{{C_TAG}}</p>
+          <h2 class="section-title">{{C_H}} <em>{{C_H_EM}}</em></h2>
+          <p class="body-text">{{C_DESC}}</p>
+          <div class="contact-methods">
+            <a href="https://wa.me/{{WA_NUM}}" class="c-method wa" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i>
+              <div><span class="cm-title">WhatsApp</span><span class="cm-sub">Resposta mais rápida</span></div>
+            </a>
+            <a href="mailto:{{C_EMAIL}}" class="c-method">
+              <i class="fas fa-envelope"></i>
+              <div><span class="cm-title">E-mail</span><span class="cm-sub">{{C_EMAIL}}</span></div>
+            </a>
+            <a href="{{IG_URL}}" class="c-method" target="_blank" rel="noopener">
+              <i class="fab fa-instagram"></i>
+              <div><span class="cm-title">Instagram</span><span class="cm-sub">{{IG_HANDLE}}</span></div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form class="cform" id="cform" action="https://formspree.io/f/{{FORMSPREE_ID}}" method="POST">
+            <div class="form-row">
+              <div class="fg">
+                <label for="nome">Seu Nome *</label>
+                <input type="text" id="nome" name="nome" required placeholder="Nome Sobrenome">
+              </div>
+              <div class="fg">
+                <label for="telefone">WhatsApp *</label>
+                <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+              </div>
+            </div>
+            <div class="fg">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com">
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label for="tipo">Tipo de Serviço *</label>
+                <select id="tipo" name="tipo_servico" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="servico1">{{SVC1_H}}</option>
+                  <option value="servico2">{{SVC2_H}}</option>
+                  <option value="servico3">{{SVC3_H}}</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label for="data">Data *</label>
+                <input type="date" id="data" name="data" required>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="local">Local *</label>
+              <input type="text" id="local" name="local" required placeholder="Local — Cidade, Estado">
+            </div>
+            <div class="fg">
+              <label for="msg">Mensagem</label>
+              <textarea id="msg" name="mensagem" rows="4" placeholder="Descreva o que você precisa..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+              <i class="fas fa-paper-plane"></i> {{C_FORM_BTN}}
+            </button>
+            <p class="form-note">* Campos obrigatórios. Responderei em até 24 horas.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">{{PRIMEIRO_NOME}}</span>
+          <span class="footer-logo-last">{{SOBRENOME}}</span>
+          <p class="footer-sub">{{SUBTITULO}}</p>
+          <p class="footer-bio">{{F_BIO}}</p>
+          <div class="footer-social">
+            <a href="{{F_IG_URL}}" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="{{F_YT_URL}}" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="{{F_FB_URL}}" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="{{F_SP_URL}}" aria-label="Spotify" target="_blank" rel="noopener"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">{{NAV_SOBRE}}</a></li>
+            <li><a href="#servico1">{{SVC1_H}}</a></li>
+            <li><a href="#servico2">{{SVC2_H}}</a></li>
+            <li><a href="#multimidia">Multimídia</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Serviços</h4>
+          <ul>
+            <li>{{F_SVC1}}</li>
+            <li>{{F_SVC2}}</li>
+            <li>{{F_SVC3}}</li>
+            <li>{{F_SVC4}}</li>
+            <li>{{F_SVC5}}</li>
+            <li>{{F_SVC6}}</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato Rápido</h4>
+          <a href="https://wa.me/{{WA_NUM}}" class="footer-wa" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+          </a>
+          <p class="footer-hours">{{F_HORARIO}}</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© {{F_ANO}} {{NOME_COMPLETO}} — Todos os direitos reservados.</p>
+        <p>{{F_CREDITO}}</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== WHATSAPP FLUTUANTE ========== -->
+  <a href="https://wa.me/{{WA_NUM}}?text={{WA_MSG_ENCODED}}"
+     class="wa-float" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-tip">{{WA_TIP}}</span>
+  </a>
+
+  <button class="back-top" id="back-top" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/vendor/lenis.min.js"></script>
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
